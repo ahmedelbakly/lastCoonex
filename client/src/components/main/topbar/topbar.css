@@ -1,0 +1,70 @@
+
+.topbar-container .up {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #E2E2E2;
+  padding-bottom: 30px;
+  gap: 30px;
+}
+
+.up .logo {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.up .logo img {
+    align-items: left;
+
+}
+.up .with-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  text-align: center;
+}
+
+.up .with-icon .icon a {
+  font-size: 14px;
+  display: block;
+  text-transform: capitalize;
+}
+
+.up .buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  border-left: 1px solid #E2E2E2;
+  padding-left: 25px;
+}
+
+
+.up .buttons .lang {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+.up .buttons .lang button {
+
+    border: none;
+   display: block;
+
+}
+
+.down {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  padding-top: 15px;
+}
+.down a {
+    font-size: 16px;
+}
+.down a:hover{
+  color: #199956;
+}

@@ -1,0 +1,49 @@
+.searchCon .down {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchCon .searchItem img {
+  display: block;
+}
+
+.searchCon .up form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+.searchCon .up .inputCon {
+  display: block;
+  flex-grow: 1;
+  max-width: 800px;
+  /* padding: 10px; */
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  position: relative;
+  color:#8898AA
+}
+.searchCon .up .inputCon input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  /* outline: none;
+  border: none; */
+  font-size: 16;
+}
+.searchCon .up .inputCon .icon-map {
+  position: absolute;
+  right: 10px;
+  top: 25%;
+  font-size: 20px;
+  color: #8898aa;
+}
