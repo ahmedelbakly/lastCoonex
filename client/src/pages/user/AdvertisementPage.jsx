@@ -10,7 +10,7 @@ import { BsCamera } from "react-icons/bs";
 import { styleVar } from "../../variableStyle";
 import Advertisement from "../../components/userInfo/Advertisement";
 import BasicPagination from "../../components/main/Pagination";
-
+import { Link } from "react-router-dom";
 const AdvertisementPage = () => {
   const Container = styled.div`
     width: 100%;
@@ -68,15 +68,15 @@ const AdvertisementPage = () => {
           <SideBar>
             <div className="item">
               <CiEdit className="icon" />
-              <a href="/">My Profile</a>
+              <Link to ="/profile">My Profile</Link>
             </div>
             <div className="item">
               <IoMdNotificationsOutline className="icon" />
-              <a href="/">notifications</a>
+              <Link to="/notification">notifications</Link>
             </div>
             <div className="item">
               <FcAdvertising className="icon" />
-              <a href="/">advertisements</a>
+              <Link to="/advertisement">advertisements</Link>
             </div>
             <div className="item last">
               <FiLogOut className="icon" />

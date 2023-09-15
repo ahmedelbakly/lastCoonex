@@ -4,7 +4,8 @@ import loginPanner from "../../images/loginPanner.png";
 import loginLogo from "../../images/loginLogo.png";
 import { passSvg, emailSvg, userSvg } from "./loginSvg.js";
 import { FcGoogle } from "react-icons/fc";
-const Singup = () => {
+import { Link } from "react-router-dom";
+const SignUp = () => {
   const LoginContainer = styled.div`
     width: 820px;
     height: 550px;
@@ -164,7 +165,7 @@ const Singup = () => {
           <FcGoogle />
         </div>
         <p className="last">
-          Already have an account? <a href="/">Login</a>
+          Already have an account? <Link to="/login">Login</Link>
         </p>
       </div>
       <div className="imgCon">
@@ -175,7 +176,7 @@ const Singup = () => {
   );
 };
 
-export default Singup;
+export default SignUp;
 
 const TextField = ({ fieldName, type, logo }) => {
   const TextFieldCon = styled.div`

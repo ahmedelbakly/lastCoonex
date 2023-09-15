@@ -26,6 +26,7 @@ import AboutUsPage from "./pages/footerLinks/AboutUs";
 import FavoritesPage from "./pages/footerLinks/FavoritesPage";
 import ContactUsPage from "./pages/footerLinks/ContactUs";
 import FQAPage from "./pages/footerLinks/FQAPage";
+import AddAvatarPage from "./pages/AddImages/addAvaterPage";
 
 
 
@@ -53,7 +54,7 @@ function App() {
       <Route path="forgetPass" element={<LoginPage component = {<ConfirmPassTwo/>}/>} />
       <Route path="confirmPass" element={<LoginPage component = {<ConfirmLoginTwo/>}/>} />
       <Route path="search" element= {<MapSearchPage/>} />
-      <Route path="productInfo" element= {<ProductInfoPage/>} />
+      <Route path="productInfo/:id" element= {<ProductInfoPage/>} />
       <Route path="slider" element= {<Slider/>} />
       <Route path="advertise/rent" element= {<AdvertisePageRent/>} />
       <Route path="advertise/sale" element= {<AdvertisePageSale/>} />
@@ -66,6 +67,7 @@ function App() {
       <Route path="favorite" element= {<FavoritesPage/>} />
       <Route path="contactUs" element= {<ContactUsPage/>} />
       <Route path="fqa" element= {<FQAPage/>} />
+      <Route path="avatar" element= {<AddAvatarPage/>} />
       </Routes>
     
       <Footer lang={lang} />

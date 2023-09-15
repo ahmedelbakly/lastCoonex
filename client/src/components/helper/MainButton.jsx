@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "styled-components"
+import styled from "styled-components";
 
-const MainButton = ({ text, padding, size }) => {
-  const Button = styled.div`
+const MainButton = ({ text, padding, size, click }) => {
+  const Button = styled.button`
     padding: ${padding};
     background: #ffffff;
     color: black;
@@ -13,7 +13,7 @@ const MainButton = ({ text, padding, size }) => {
       color: #fff;
     }
   `;
-  return <Button>{text}</Button>;
+  return <Button onClick={() => click()}>{text}</Button>;
 };
 
 export default MainButton;

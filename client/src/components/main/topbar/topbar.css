@@ -16,6 +16,7 @@
 }
 .up .logo img {
     align-items: left;
+    cursor: pointer;
 
 }
 .up .with-icon {

@@ -5,8 +5,41 @@ import profile from "../../images/profile.png";
 import styled from "styled-components"
 import { AiOutlineEye } from "react-icons/ai";
 import { AiOutlineEyeInvisible } from "react-icons/ai";
+import { useState } from "react";
+import axios from "axios";
+import { useNavigate, Link } from "react-router-dom"
+
+
 
 const Profile = () => {
+  // js code
+  const navigate = useNavigate()
+  const handleLink = (nav) => {
+    navigate(nav);
+  }
+  const [img, setImg] = useState("")
+  const handleChange = (e) => {
+
+
+    if (e.target.files) { setImg(e.target.files[0]) }
+  }
+
+  const handleUpload = () => {
+    const formData = new FormData()
+    formData.append("img", img)
+    axios.post('http://localhost:3001/user/img', formData)
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.error(err));
+      setImg("") 
+  }
+
+
+
+
+
+
+  // styled-components
   const FormCon = styled.form`
     width: 100%;
     display: flex;
@@ -21,6 +54,9 @@ const Profile = () => {
       border-radius: 50%;
       position: relative;
       margin: auto;
+      & .add-img {
+        display:none;
+      }
       & img {
         width: 100%;
         height: 100%;
@@ -118,7 +154,15 @@ const Profile = () => {
       <div className="imgCon">
         <img src={profile} alt="" />
         <div className="conICon">
-          <BsCamera className="icon" />
+        <BsCamera className="icon"  onClick={()=>handleLink("/avatar")}/>
+        {/*  <label>
+            <input className="add-img" type="file" name="" id="" onChange={(e)=>{
+              handleChange(e)
+              handleUpload()
+            }} />
+           
+          </label>*/}
+
         </div>
       </div>
       <InputsContainer>

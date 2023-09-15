@@ -26,25 +26,18 @@ const userBusSchema = Schema({
     type: String,
     required: true,
   },
-  type: {
-    type: String,
+  active: {
+    type: Boolean,
     required: true,
   },
-  image:String,
+
+  image: String,
+  refreshToken: String
 });
 
 export const UserCompany = model("UserCompany", userBusSchema);
 
-/*
-Company Name *
-City *
-Job Title *
-First Name *
-Last Name *
-Email *
-Phone *
 
-*/
 const userSchema = Schema({
   username: {
     type: String,
@@ -62,6 +55,16 @@ const userSchema = Schema({
     type: String,
     required: true,
   },
+  phone: {
+    type: String,
+    required: true,
+  },
+  image: String,
+  active: {
+    type: Boolean,
+    required: true,
+  },
+  refreshToken: String
 });
 
 export const User = model("User", userSchema);

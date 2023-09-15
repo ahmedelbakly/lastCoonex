@@ -6,7 +6,16 @@ import { MdFavorite } from "react-icons/md";
 import { BiMap } from "react-icons/bi";
 import { PiBedDuotone } from "react-icons/pi";
 import { PiBathtubThin } from "react-icons/pi";
+import { useNavigate } from "react-router-dom";
+import {  useParams } from 'react-router-dom';
 const Card = ({width}) => {
+  let { id } = useParams();
+  console.log(id)
+  const proId = "fh6f+hfh8fh8+9+fgasss"
+  const navigate =  useNavigate()
+  const handleLink = (nav)=>{
+    navigate(nav);
+  }
   const Card = styled.div`
     display: flex;
     justify-content: center;
@@ -117,7 +126,7 @@ const Card = ({width}) => {
   `;
 
   return (
-    <Card>
+    <Card onClick={()=>handleLink(`/productInfo/${proId}`)}>
       <div className="img">
         <img src={card} alt="" />
       </div>

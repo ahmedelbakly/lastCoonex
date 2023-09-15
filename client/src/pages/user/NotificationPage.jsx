@@ -9,6 +9,7 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsCamera } from "react-icons/bs";
 import { styleVar } from "../../variableStyle";
 import Notification from "../../components/userInfo/Notification";
+import { Link } from "react-router-dom";
 
 const NotificationPage = () => {
   const Container = styled.div`
@@ -63,15 +64,15 @@ const NotificationPage = () => {
           <SideBar>
             <div className="item">
               <CiEdit className="icon" />
-              <a href="/">My Profile</a>
+              <Link to ="/profile">My Profile</Link>
             </div>
             <div className="item">
               <IoMdNotificationsOutline className="icon" />
-              <a href="/">notifications</a>
+              <Link to="/notification">notifications</Link>
             </div>
             <div className="item">
               <FcAdvertising className="icon" />
-              <a href="/">advertisements</a>
+              <Link to="/advertisement">advertisements</Link>
             </div>
             <div className="item last">
               <FiLogOut className="icon" />

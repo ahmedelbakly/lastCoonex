@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import MainContainer from "../../components/main/Container";
 import AdvBanner from "../../components/advertise/AdvBanner";
 import styled from "styled-components"
@@ -10,8 +10,11 @@ import { BsCamera } from "react-icons/bs";
 import { styleVar } from "../../variableStyle";
 import profile from "../../images/profile.png";
 import Profile from "../../components/userInfo/Profile";
+import {Link} from 'react-router-dom';
+
 
 const ProfilePage = () => {
+  
   const Container = styled.div`
     width: 100%;
  
@@ -65,19 +68,19 @@ const ProfilePage = () => {
           <SideBar>
             <div className="item">
               <CiEdit className="icon" />
-              <a href="/">My Profile</a>
+              <Link to ="/profile">My Profile</Link>
             </div>
             <div className="item">
               <IoMdNotificationsOutline className="icon" />
-              <a href="/">notifications</a>
+              <Link to="/notification">notifications</Link>
             </div>
             <div className="item">
               <FcAdvertising className="icon" />
-              <a href="/">advertisements</a>
+              <Link to="/advertisement">advertisements</Link>
             </div>
             <div className="item last">
               <FiLogOut className="icon" />
-              <a href="/">Log out</a>
+              <Link to="/">Log out</Link>
             </div>
           </SideBar>
          <Content>

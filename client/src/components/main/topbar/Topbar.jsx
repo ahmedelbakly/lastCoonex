@@ -8,30 +8,36 @@ import { TfiWorld } from "react-icons/tfi";
 import MainButton from "../../helper/MainButton";
 import MainContainer from "../Container";
 import { useTranslation } from "react-i18next";
-import {Link} from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom"
+
+
 
 
 const Topbar = ({ lang, handelChangeLang }) => {
+  const navigate = useNavigate()
+  const handleLink = (nav) => {
+    navigate(nav);
+  }
   const { i18n, t } = useTranslation();
   return (
     <MainContainer customClass="topbar-container" padding="32px 50px">
       <div className="up">
         <div className="logo">
-          <img src={logo} alt="logo" />
+          <img src={logo} alt="logo" onClick={() => handleLink("/")} />
         </div>
 
         <div className="with-icon">
           <div className="icon">
             <GrFavorite />
-            <a href="/"> {t("Favorites")}</a>
+            <Link to ="/favorite"> {t("Favorites")}</Link>
           </div>
           <div className="icon">
             <FcAdvertising />
-            <a href="/">{t("myAds")}</a>
+            <Link to ="/advertisement">{t("myAds")}</Link>
           </div>
           <div className="icon">
             <IoIosNotificationsOutline />
-            <a href="/">{t("notifications")}</a>
+            <Link to ="/notification">{t("notifications")}</Link>
           </div>
         </div>
         <div className="buttons">
@@ -42,8 +48,8 @@ const Topbar = ({ lang, handelChangeLang }) => {
             </button>{" "}
             <p>{lang}</p>
           </div>
-          <MainButton text={t("loginButton")} padding="5px 20px" size="20px" />
-          <MainButton text={t("adsButton")} padding="5px 20px" size="20px" />
+          <MainButton text={t("loginButton")} padding="5px 20px" size="20px" click={() => handleLink("/login")} />
+          <MainButton text={t("adsButton")} padding="5px 20px" size="20px" click={() => handleLink("/advertisement")} />
         </div>
       </div>
       <div className="down">

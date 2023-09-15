@@ -4,6 +4,7 @@ import loginPanner from "../../images/loginPanner.png";
 import loginLogo from "../../images/loginLogo.png";
 import { passSvg, emailSvg } from "./loginSvg.js";
 import { FcGoogle } from "react-icons/fc";
+import { Link } from "react-router-dom";
 const Login = () => {
   const LoginContainer = styled.div`
     width: 820px;
@@ -172,7 +173,7 @@ const Login = () => {
           <FcGoogle />
         </div>
         <p className="last">
-          Don’t have an account ? <a href="/">Sign up</a>
+          Don’t have an account ? <Link to="/signup">Sign up</Link>
         </p>
       </div>
       <div className="imgCon">
