@@ -1,96 +1,101 @@
-
 import dotenv from "dotenv";
 dotenv.config({ path: "../.env" });
 import { User, UserCompany } from "../models/userModel.js";
 import bcrypt from "bcrypt";
 const salt = bcrypt.genSaltSync(+process.env.HASH_SALT);
 const salt2 = bcrypt.genSaltSync(15);
-import jwt from 'jsonwebtoken';
+import jwt from "jsonwebtoken";
 import { generateToken } from "../helper/functions.js";
 import { sendMailToUser } from "../helper/nodeMail.js";
 const { sign, verify } = jwt;
 let refreshTokens = [];
 
-
-
-
-
 ////////////////////////////////////////////////////////////////////
 
 export const createUser = async (req, res, next) => {
-  const { username, email, password, phone } = req.body;
+  const { username, email, password, agree } = req.body;
+  console.log(req.body);
   try {
-    if (username && email && password, phone) {
+    if ((username && email && password, agree)) {
       console.log(username, email, password);
-      const user = await User.findOne({ email: email }) || await UserCompany.findOne({ email: email });
+      const user =
+        (await User.findOne({ email: email })) ||
+        (await UserCompany.findOne({ email: email }));
       if (user) {
-        return res.json('this email is register as person');
+        return res.json("this email is register as person");
       }
-     
+
       const hash = bcrypt.hashSync(password, salt);
       const userCreated = await User.create({
         username: username,
         email: email,
         password: hash,
-        phone: phone,
+        phone: "01092498555",
         type: "user",
         active: true,
         image: "",
         refreshToken: "",
       });
-     const code = 5243
-      await sendMailToUser(email, "activation Email", code);
-     
+      const code = 5243;
+      // await sendMailToUser(email, "activation Email", code);
+
       res.json(userCreated);
     } else {
-      res.json(req.body); 
+      res.json(req.body);
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
 };
 ////////////////////////////////////////////////////////////////////
 
 export const updateUser = async (req, res, next) => {
-  const { id, username, email, phone } = req.body;
-  console.log(id, username, email, phone)
+  console.log(req.body);
+  const { id } = req.user;
+  const { username, email, phone } = req.body;
+
   try {
     if (id && username && email && phone) {
-
-      const user = await User.findOneAndUpdate({ _id: id }, {
-        username: username,
-        email: email,
-        phone: phone,
-      });
-
-      res.json({ user, color: "red" });
+      await User.findOneAndUpdate(
+        { _id: id },
+        {
+          username: username,
+          email: email,
+          phone: phone,
+        }
+      );
+      const user = await User.findOne({ _id: id });
+      console.log(user);
+      await res.json(user);
     } else {
       res.json("data is error");
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
 };
 ////////////////////////////////////////////////////////////////////
 
 export const updateUserPass = async (req, res, next) => {
-  const { id, password } = req.body;
+  const { password, currentPassword } = req.body;
+  const { id } = req.user;
+  console.log(password, currentPassword, id);
+  try {
+    if (id && currentPassword && password) {
+      const user = await User.findOne({ _id: id });
+      console.log(user);
 
-  if (id && currentPass && password) {
-    console.log(username, email);
-    const user = await User.findOne({ _id: id });
-    const passSave = bcrypt.compare(user.password, salt)
-    if (passSave === currentPass) {
-      const hash = bcrypt.hashSync(password, salt);
-      user.password = hash,
-        user.save();
-      res.json(user);
+      if (bcrypt.compare(currentPassword, user.password)) {
+        const passHash = await bcrypt.hash(password, salt);
+        user.password = passHash;
+        await user.save();
+        res.json("set new password");
+      }
     } else {
       res.json(req.body);
-
     }
+  } catch (error) {
+    console.log(error);
   }
 };
 ////////////////////////////////////////////////////////////////////
@@ -99,11 +104,12 @@ export const createUserBus = async (req, res, next) => {
   const { companyName, email, password, firstName, lastName, phone } = req.body;
   try {
     if (companyName && email && password && firstName && lastName && phone) {
-      const user = await User.findOne({ email: email }) || await UserCompany.findOne({ email: email });
+      const user =
+        (await User.findOne({ email: email })) ||
+        (await UserCompany.findOne({ email: email }));
       if (user) {
-        return res.json('this email is register as person');
+        return res.json("this email is register as person");
       }
-      
 
       const hash = bcrypt.hashSync(password, salt);
       const userCreated = await UserCompany.create({
@@ -116,7 +122,6 @@ export const createUserBus = async (req, res, next) => {
         active: false,
         image: "",
         refreshToken: "",
-        
       });
       res.json(user);
     } else {
@@ -125,7 +130,6 @@ export const createUserBus = async (req, res, next) => {
   } catch (error) {
     console.log(error);
   }
-
 };
 
 /////////////////////////////////////////////////////////////
@@ -133,57 +137,53 @@ export const updateBusUser = async (req, res, next) => {
   const { companyName, email, firstName, lastName, phone } = req.body;
 
   if (companyName && email && password && firstName && lastName && phone) {
-
-    const user = await User.findOneAndUpdate({ _id: id }, {
-      companyName: companyName,
-      email: email,
-      firstName: firstName,
-      lastName: lastName,
-      phone: phone
-    });
+    const user = await User.findOneAndUpdate(
+      { _id: id },
+      {
+        companyName: companyName,
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        phone: phone,
+      }
+    );
     res.json(user);
   } else {
     res.json(req.body);
   }
 };
 
-
-
 /////////////////////////////////////////////////////////////////
 
 export const updateUserImage = async (req, res, next) => {
-  // return console.log(req.body)
-  const { id } = req.body
+  const { id } = req.body;
   try {
     if (id && req.file.filename) {
-
-      const user = await User.findOneAndUpdate({ _id: id }, {
-        image: req.file.filename
-
-      });
-
-      res.json({
-        _id: user._id,
-        username: user.username,
-        email: user.email,
-
-        type: user.type,
-        phone: user.phone,
-        image: user.image,
-        active: user.active,
-
-      });
+      await User.findOneAndUpdate(
+        { _id: id },
+        {
+          image: req.file.filename,
+        }
+      );
+      const user = await User.findOne({ _id: id });
+      return res.json(user);
     } else {
       res.json(req.body);
     }
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
 };
 
-
-
+/*{
+        _id: user._id,
+        username: user.username,
+        email: user.email,
+        type: user.type,
+        phone: user.phone,
+        image: user.image,
+        active: user.active,
+      } */
 //////////////////////////////////////////////////////////
 
 export const loginUser = async (req, res, next) => {
@@ -192,7 +192,9 @@ export const loginUser = async (req, res, next) => {
     if (!(email && password)) {
       return res.json("all fields is required");
     } else {
-      const user = await User.findOne({ email: email }) || await UserCompany.findOne({ email: email });
+      const user =
+        (await User.findOne({ email: email })) ||
+        (await UserCompany.findOne({ email: email }));
 
       if (user) {
         if (!user.active) {
@@ -213,11 +215,9 @@ export const loginUser = async (req, res, next) => {
             process.env.JWT_SECRET_REFRESH_EXPIRE
           );
 
-          const hashToken = bcrypt.hashSync(refreshToken, salt2)
+        
           user.refreshToken = refreshToken;
           await user.save();
-
-
 
           return res.json({
             userToken: `Bearer ${token}`,
@@ -240,23 +240,24 @@ export const loginUser = async (req, res, next) => {
 //////////////////////////////////////////////////////////////////////////////
 
 export const createRefreshToken = async (req, res, next) => {
-  const { id, refreshToken } = req.body;
-  if (!refreshToken || !id) return res.status(403).json("you not authorization");
-  const userSelected =await User.findOne({ _id: id }) || await UserCompany.findOne({ _id: id });
-  
-  if(!userSelected) return res.json("user not found")
+  const { refreshToken, id } = req.body;
+
+  if (!refreshToken || !id)
+    return res.status(403).json("you not authorization");
+  const userSelected =
+    (await User.findOne({ _id: id })) ||
+    (await UserCompany.findOne({ _id: id }));
+
+  if (!userSelected) return res.json("user not found");
   if (userSelected) {
-
     if (userSelected.refreshToken !== refreshToken) {
-
       return res.status(403).json("refreshToken is not valid");
-
     }
 
     verify(
       refreshToken,
-      process.env.JWT_SECRET_REFRESH,   async (error, user) => {
-
+      process.env.JWT_SECRET_REFRESH,
+      async (error, user) => {
         const newAccessToken = generateToken(
           user,
           process.env.JWT_SECRET_ACCESS,
@@ -269,42 +270,53 @@ export const createRefreshToken = async (req, res, next) => {
         );
         userSelected.refreshToken = newRefreshToken;
         await userSelected.save();
-
+        console.log("###############", newRefreshToken);
         res.json({
           accessToken: `bearer ${newAccessToken}`,
           refreshToken: newRefreshToken,
-          refreshTokens: refreshTokens,
         });
       }
     );
   }
+};
 
+export const getUser = async (req, res, next) => {
+const {id} = req.user;
+console.log("############",id)
+try {
+  const user =
+  (await User.findOne({ _id: id })) ||
+  (await UserCompany.findOne({ _id: id }));
+  if (user) {
+    const token = generateToken(
+      user,
+      process.env.JWT_SECRET_ACCESS,
+      process.env.JWT_SECRET_ACCESS_EXPIRE
+    );
+    const refreshToken = generateToken(
+      user,
+      process.env.JWT_SECRET_REFRESH,
+      process.env.JWT_SECRET_REFRESH_EXPIRE
+    );
 
+  
+    user.refreshToken = refreshToken;
+    await user.save();
 
+    return res.json({
+      userToken: `Bearer ${token}`,
+      refreshToken: refreshToken,
+      user: user,
+  
+    });
+  }
+} catch (error) {
+  console.log(error);
+}
 
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // ********
-
-
-
 
 /*
 

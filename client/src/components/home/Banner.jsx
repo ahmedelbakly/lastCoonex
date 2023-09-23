@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components"
 
 const Banner = ({ img, height, imgLeft, imgRight, children,overlay,topButton }) => {
-  console.log(height);
+ 
   const BannerContainer = styled.div`
     height: ${height};
     width: 100%;

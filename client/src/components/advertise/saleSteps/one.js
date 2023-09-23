@@ -1,9 +1,5 @@
-import React from "react";
 import styled from "styled-components"
-import { GrUpload } from "react-icons/gr";
-
-const CreateAddTwo = ({ value }) => {
-  const Container = styled.form`
+export const Container = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
@@ -11,10 +7,54 @@ const CreateAddTwo = ({ value }) => {
     gap: 20xp;
     margin-top: 20px;
     flex-direction: column;
-    
-   
+    & .videoCon {
+      width: 100% !important;
+    }
+    & .disCon {
+      width: 100% !important;
+      & textarea {
+        padding: 20px;
+        color: #8898aa;
+        width: 100% !important;
+        border-radius: 10px;
+        border: 1px solid #e2e2e2;
+      }
+    }
+    & .add-img {
+      width: 100% !important;
+      height: 124px;
+      & .input {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        width: 100%;
+        border-radius: 10px;
+
+        border: 1px solid #e2e2e2;
+        & input {
+          width: max-content;
+          height: max-content;
+          text-align: center;
+          padding-left: 18%;
+          border: none;
+          display: none;
+        }
+        & label {
+          color: #199956;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          gap: 4px;
+          & .icon {
+            color: green !important;
+          }
+        }
+      }
+    }
   `;
-  const InputsContainer = styled.div`
+  export const InputsContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -22,7 +62,7 @@ const CreateAddTwo = ({ value }) => {
     flex-wrap: wrap;
 
     & .input-con {
-      width: 45%;
+      width: 30%;
       & p {
       }
       & input {
@@ -30,7 +70,7 @@ const CreateAddTwo = ({ value }) => {
       }
     }
   `;
-  const TextFieldCon = styled.div`
+  export const TextFieldCon = styled.div`
     width: 100%;
     height: max-content;
     display: flex;
@@ -56,17 +96,11 @@ const CreateAddTwo = ({ value }) => {
     }
   `;
 
-  const ButtonsContainer = styled.div`
+  export const ButtonsContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    & .leftCon {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 40%;
-    }
     & button {
       display: block;
       border-radius: 8px;
@@ -82,7 +116,7 @@ const CreateAddTwo = ({ value }) => {
     }
   `;
 
-  const AddImage = styled.div`
+  export const AddImage = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
@@ -95,44 +129,7 @@ const CreateAddTwo = ({ value }) => {
       width: max-content;
     }
   `;
-
-  return (
-    <Container>
-      <InputsContainer>
-        <TextFieldCon className="input-con">
-          <p>City *</p>
-
-          <input type="text" id="" placeholder="city" />
-        </TextFieldCon>
-        <TextField fieldName="Surface area *" options={[]} />
-        <TextFieldCon className="input-con">
-          <p>Price*</p>
-
-          <input type="number" id="" placeholder="price" />
-        </TextFieldCon>
-       
-        <TextField fieldName="Baths *" options={[]} />
-        <TextField fieldName="Rooms *" options={[]} />
-        <TextField fieldName="Floor *" options={[]} />
-  
-      </InputsContainer>
-     
-      
-      <ButtonsContainer>
-      <div className="leftCon">
-      <button>Back</button>
-        <button>Save as Draft</button>
-      </div>
-        <button>Next</button>
-       </ButtonsContainer>
-    </Container>
-  );
-};
-
-export default CreateAddTwo;
-
-const TextField = ({ fieldName, options }) => {
-  const TextFieldCon = styled.div`
+  export const TextFieldCon2 = styled.div`
     width: 100%;
     height: max-content;
     display: flex;
@@ -162,18 +159,3 @@ const TextField = ({ fieldName, options }) => {
       }
     }
   `;
-
-  return (
-    <TextFieldCon className="input-con">
-      <p>{fieldName}</p>
-
-      <select>
-        <option value="select Option">select Option</option>
-        <option value="other Option">Other option</option>
-        <option value="other Option">Other option</option>
-        <option value="other Option">Other option</option>
-        <option value="other Option">Other option</option>
-      </select>
-    </TextFieldCon>
-  );
-};

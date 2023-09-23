@@ -7,8 +7,8 @@ const { sign, verify } = jwt;
 export const generateToken = (userLog, secret, expire) => {
   const accessToken = sign(
     {
-      id: userLog.id,
-      name : userLog.name,
+      id: userLog._id,
+      username : userLog.username,
       type:userLog.type
     },
     secret,

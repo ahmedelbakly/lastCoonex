@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import {  useParams } from 'react-router-dom';
 const Card = ({width}) => {
   let { id } = useParams();
-  console.log(id)
+
   const proId = "fh6f+hfh8fh8+9+fgasss"
   const navigate =  useNavigate()
   const handleLink = (nav)=>{

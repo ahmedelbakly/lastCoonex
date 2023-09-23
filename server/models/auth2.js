@@ -6,7 +6,7 @@ const { sign, verify } = jwt;
 
 // const funHelper =  require("../helper/functions")
 
-const auth = async (req, res, next) => {
+const authGet = async (req, res, next) => {
   const authHeader = req.headers.authorization;
   try {
 
@@ -18,7 +18,7 @@ const auth = async (req, res, next) => {
     return  res.json("no token");
     } else {
       
-       verify(token, "MySEcretToken", (error, user) => {
+       verify(token, "MySEcretRefreshToken", (error, user) => {
         if (error) {
         return  res.json("token no valid");
         }
@@ -36,4 +36,4 @@ const auth = async (req, res, next) => {
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-export default auth
+export default authGet

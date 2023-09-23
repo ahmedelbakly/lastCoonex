@@ -1,9 +1,5 @@
-import React from "react";
 import styled from "styled-components"
-import { GrUpload } from "react-icons/gr";
-
-const CreateAddOne = ({ value }) => {
-  const Container = styled.form`
+export const Container = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
@@ -58,7 +54,7 @@ const CreateAddOne = ({ value }) => {
       }
     }
   `;
-  const InputsContainer = styled.div`
+  export const InputsContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -74,7 +70,7 @@ const CreateAddOne = ({ value }) => {
       }
     }
   `;
-  const TextFieldCon = styled.div`
+  export const TextFieldCon = styled.div`
     width: 100%;
     height: max-content;
     display: flex;
@@ -100,7 +96,7 @@ const CreateAddOne = ({ value }) => {
     }
   `;
 
-  const ButtonsContainer = styled.div`
+  export const ButtonsContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -120,7 +116,7 @@ const CreateAddOne = ({ value }) => {
     }
   `;
 
-  const AddImage = styled.div`
+  export const AddImage = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
@@ -133,53 +129,7 @@ const CreateAddOne = ({ value }) => {
       width: max-content;
     }
   `;
-
-  return (
-    <Container>
-      <InputsContainer>
-        <TextFieldCon className="input-con">
-          <p>Ad Title *</p>
-
-          <input type="" id="" placeholder="e.g. 2000 Sqft House for Sale" />
-        </TextFieldCon>
-        <TextField fieldName="Property Type *" options={[]} />
-        <TextField fieldName="Category *" options={[]} />
-      </InputsContainer>
-      <TextFieldCon className="input-con videoCon">
-        <p>Detailed Video Link *</p>
-        <input type="url" id="" placeholder="https:/www.Haraj X.com" />
-      </TextFieldCon>
-      <TextFieldCon className="input-con disCon">
-        <p>Ad Description *</p>
-        <textarea
-          type=""
-          cols={187}
-          rows={5}
-          placeholder="Describe your property"
-        />
-      </TextFieldCon>
-      <TextFieldCon className="add-img">
-        <p>Add Images *</p>
-        <div className="input">
-          <label id="file-input-label" for="file-input">
-            <GrUpload fontSize="20px"  className="icon"/>
-            <p style={{color:"#199956"}}>Upload the image or browse your device</p>
-          </label>
-          <input type="file" name="" id="file-input" />
-        </div>
-      </TextFieldCon>
-      <ButtonsContainer>
-        <button>Save as Draft</button>
-        <button>Next</button>
-      </ButtonsContainer>
-    </Container>
-  );
-};
-
-export default CreateAddOne;
-
-const TextField = ({ fieldName, options }) => {
-  const TextFieldCon = styled.div`
+  export const TextFieldCon2 = styled.div`
     width: 100%;
     height: max-content;
     display: flex;
@@ -209,18 +159,3 @@ const TextField = ({ fieldName, options }) => {
       }
     }
   `;
-
-  return (
-    <TextFieldCon className="input-con">
-      <p>{fieldName}</p>
-
-      <select>
-        <option value="select Option">select Option</option>
-        <option value="other Option">Other option</option>
-        <option value="other Option">Other option</option>
-        <option value="other Option">Other option</option>
-        <option value="other Option">Other option</option>
-      </select>
-    </TextFieldCon>
-  );
-};

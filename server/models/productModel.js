@@ -5,6 +5,10 @@ const adForRentSchema = Schema({
     type: String,
     required: true,
   },
+  userId: {
+    type: String,
+    required: true,
+  },
   videoLink: {
     type: String,
     required: true,
@@ -22,10 +26,7 @@ const adForRentSchema = Schema({
     required: true,
   },
 
-  phone: {
-    type: String,
-    required: true,
-  },
+ 
   images: {
     type: [String],
     required: true,
@@ -62,11 +63,11 @@ const adForRentSchema = Schema({
     required: true,
   },
  furnished:{
-    type: Boolean,
+    type: String,
     required: true,
   },
  mortgaged:{
-    type: Boolean,
+    type: String,
     required: true,
   },
  projectedBy:{
@@ -90,6 +91,10 @@ const adForSaleSchema = Schema({
     type: String,
     required: true,
   },
+ userId: {
+    type: String,
+    required: true,
+  },
   videoLink: {
     type: String,
     required: true,
@@ -107,10 +112,7 @@ const adForSaleSchema = Schema({
     required: true,
   },
 
-  phone: {
-    type: String,
-    required: true,
-  },
+ 
   images: {
     type: [String],
     required: true,
@@ -147,11 +149,11 @@ const adForSaleSchema = Schema({
     required: true,
   },
  furnished:{
-    type: Boolean,
+    type: String,
     required: true,
   },
  mortgaged:{
-    type: Boolean,
+    type: String,
     required: true,
   },
  projectedBy:{

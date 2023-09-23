@@ -11,55 +11,55 @@ import { styleVar } from "../../variableStyle";
 import profile from "../../images/profile.png";
 import Profile from "../../components/userInfo/Profile";
 import {Link} from 'react-router-dom';
+const Container = styled.div`
+width: 100%;
 
+display: flex;
+justify-content: space-between;
+gap: 4%;
+`;
+const SideBar = styled.div`
+width: 30%;
+border: ${styleVar.borderStyle};
+border-radius: 10px;
+height: max-content;
+display: flex;
+justify-content: flex-start;
+flex-direction: column;
+padding: 10px 20px;
+& .item {
+  width: 100%;
+  height: 50px;
+  /* background-color: orange; */
+  border-bottom: ${styleVar.borderStyle};
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  & a {
+    color: ${styleVar.mainColor};
+    font-size: 16px;
+    font-weight: 600;
+  }
+  & .icon {
+    font-size: 20px;
+  }
+}
+& .last {
+  border: none;
+}
+`;
+const Content = styled.div`
+width: 66%;
 
-const ProfilePage = () => {
+border: ${styleVar.borderStyle};
+padding: 30px 0px;
+
+`;
+
+const ProfilePage = ({handleLogout}) => {
   
-  const Container = styled.div`
-    width: 100%;
  
-    display: flex;
-    justify-content: space-between;
-    gap: 4%;
-  `;
-  const SideBar = styled.div`
-    width: 30%;
-    border: ${styleVar.borderStyle};
-    border-radius: 10px;
-    height: max-content;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    padding: 10px 20px;
-    & .item {
-      width: 100%;
-      height: 50px;
-      /* background-color: orange; */
-      border-bottom: ${styleVar.borderStyle};
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 10px;
-      & a {
-        color: ${styleVar.mainColor};
-        font-size: 16px;
-        font-weight: 600;
-      }
-      & .icon {
-        font-size: 20px;
-      }
-    }
-    & .last {
-      border: none;
-    }
-  `;
-  const Content = styled.div`
-    width: 66%;
-   
-    border: ${styleVar.borderStyle};
-    padding: 30px 0px;
-    
-  `;
   return (
     <MainContainer>
       <AdvBanner text="Profile" />
@@ -80,7 +80,7 @@ const ProfilePage = () => {
             </div>
             <div className="item last">
               <FiLogOut className="icon" />
-              <Link to="/">Log out</Link>
+              <Link to="/" onClick={()=> handleLogout()}>Log out</Link>
             </div>
           </SideBar>
          <Content>

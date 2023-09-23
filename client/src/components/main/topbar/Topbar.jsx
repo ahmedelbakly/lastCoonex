@@ -8,15 +8,26 @@ import { TfiWorld } from "react-icons/tfi";
 import MainButton from "../../helper/MainButton";
 import MainContainer from "../Container";
 import { useTranslation } from "react-i18next";
-import { useNavigate, Link } from "react-router-dom"
-
-
+import { useNavigate, Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import Avatar from "@mui/material/Avatar";
+import AccountMenu from "../menu";
+import { logOutUser} from '../../../redux/userSlice';
 
 
 const Topbar = ({ lang, handelChangeLang }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+ 
+  const user = useSelector((state) => state.user.userInfo);
+  const dispatch = useDispatch();
   const handleLink = (nav) => {
     navigate(nav);
+  };
+
+  const handleLogout = ()=>{
+   dispatch(logOutUser())
+   localStorage.removeItem("token");
+   localStorage.removeItem("reToken");
   }
   const { i18n, t } = useTranslation();
   return (
@@ -29,15 +40,15 @@ const Topbar = ({ lang, handelChangeLang }) => {
         <div className="with-icon">
           <div className="icon">
             <GrFavorite />
-            <Link to ="/favorite"> {t("Favorites")}</Link>
+            <Link to="/favorite"> {t("Favorites")}</Link>
           </div>
           <div className="icon">
             <FcAdvertising />
-            <Link to ="/advertisement">{t("myAds")}</Link>
+            <Link to="/advertisement">{t("myAds")}</Link>
           </div>
           <div className="icon">
             <IoIosNotificationsOutline />
-            <Link to ="/notification">{t("notifications")}</Link>
+            <Link to="/notification">{t("notifications")}</Link>
           </div>
         </div>
         <div className="buttons">
@@ -48,8 +59,27 @@ const Topbar = ({ lang, handelChangeLang }) => {
             </button>{" "}
             <p>{lang}</p>
           </div>
-          <MainButton text={t("loginButton")} padding="5px 20px" size="20px" click={() => handleLink("/login")} />
-          <MainButton text={t("adsButton")} padding="5px 20px" size="20px" click={() => handleLink("/advertisement")} />
+
+          
+
+          { Object.keys(user).length !== 0 ?
+          <div className="nameAvatar">
+            <Avatar alt="" src={`http://localhost:3001/images/${user.image}`} />
+           <AccountMenu username = {user.username} logout={handleLogout} handleLink={handleLink}/>
+          </div>
+          :
+          <MainButton
+            text={t("loginButton")}
+            padding="5px 20px"
+            size="20px"
+            click={() => handleLink("/login")}
+          /> }
+          <MainButton
+            text={t("adsButton")}
+            padding="5px 20px"
+            size="20px"
+            click={() => handleLink("/advertisement")}
+          />
         </div>
       </div>
       <div className="down">
@@ -64,3 +94,5 @@ const Topbar = ({ lang, handelChangeLang }) => {
 };
 
 export default Topbar;
+
+//E:\lastCoonex\server\public\images\avatar.png

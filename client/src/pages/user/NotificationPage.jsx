@@ -11,51 +11,53 @@ import { styleVar } from "../../variableStyle";
 import Notification from "../../components/userInfo/Notification";
 import { Link } from "react-router-dom";
 
-const NotificationPage = () => {
-  const Container = styled.div`
-    width: 100%;
+const Container = styled.div`
+width: 100%;
+
+display: flex;
+justify-content: space-between;
+gap: 4%;
+`;
+const SideBar = styled.div`
+width: 30%;
+border: ${styleVar.borderStyle};
+border-radius: 10px;
+height: max-content;
+display: flex;
+justify-content: flex-start;
+flex-direction: column;
+padding: 10px 20px;
+& .item {
+  width: 100%;
+  height: 50px;
+  border-bottom: ${styleVar.borderStyle};
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  & a {
+    color: ${styleVar.mainColor};
+    font-size: 16px;
+    font-weight: 600;
+  }
+  & .icon {
+    font-size: 20px;
+  }
+}
+& .last {
+  border: none;
+}
+`;
+const Content = styled.div`
+width: 66%;
+
+border: ${styleVar.borderStyle};
+padding: 30px 0px;
+
+`;
+
+const NotificationPage = ({handleLogout}) => {
  
-    display: flex;
-    justify-content: space-between;
-    gap: 4%;
-  `;
-  const SideBar = styled.div`
-    width: 30%;
-    border: ${styleVar.borderStyle};
-    border-radius: 10px;
-    height: max-content;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    padding: 10px 20px;
-    & .item {
-      width: 100%;
-      height: 50px;
-      border-bottom: ${styleVar.borderStyle};
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 10px;
-      & a {
-        color: ${styleVar.mainColor};
-        font-size: 16px;
-        font-weight: 600;
-      }
-      & .icon {
-        font-size: 20px;
-      }
-    }
-    & .last {
-      border: none;
-    }
-  `;
-  const Content = styled.div`
-    width: 66%;
-   
-    border: ${styleVar.borderStyle};
-    padding: 30px 0px;
-    
-  `;
   return (
     <MainContainer>
       <AdvBanner text="Notification" />
@@ -76,7 +78,7 @@ const NotificationPage = () => {
             </div>
             <div className="item last">
               <FiLogOut className="icon" />
-              <a href="/">Log out</a>
+              <Link to="/" onClick={()=> handleLogout()}>Log out</Link>
             </div>
           </SideBar>
          <Content>

@@ -11,55 +11,57 @@ import { styleVar } from "../../variableStyle";
 import Advertisement from "../../components/userInfo/Advertisement";
 import BasicPagination from "../../components/main/Pagination";
 import { Link } from "react-router-dom";
-const AdvertisementPage = () => {
-  const Container = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    gap: 4%;
-  `;
-  const SideBar = styled.div`
-    width: 23%;
-    border: ${styleVar.borderStyle};
-    border-radius: 10px;
-    height: max-content;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    padding: 10px 20px;
-    & .item {
-      width: 100%;
-      height: 50px;
-      /* background-color: orange; */
-      border-bottom: ${styleVar.borderStyle};
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 10px;
-      & a {
-        color: ${styleVar.mainColor};
-        font-size: 16px;
-        font-weight: 600;
-      }
-      & .icon {
-        font-size: 20px;
-      }
-    }
-    & .last {
-      border: none;
-    }
-  `;
-  const Content = styled.div`
-    width: 73%;
-    border: ${styleVar.borderStyle};
-    padding: 10px 0px;
-  `;
-  const Pagination = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 150px;
-  `;
+
+const Container = styled.div`
+width: 100%;
+display: flex;
+justify-content: space-between;
+gap: 4%;
+`;
+const SideBar = styled.div`
+width: 23%;
+border: ${styleVar.borderStyle};
+border-radius: 10px;
+height: max-content;
+display: flex;
+justify-content: flex-start;
+flex-direction: column;
+padding: 10px 20px;
+& .item {
+  width: 100%;
+  height: 50px;
+  /* background-color: orange; */
+  border-bottom: ${styleVar.borderStyle};
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  & a {
+    color: ${styleVar.mainColor};
+    font-size: 16px;
+    font-weight: 600;
+  }
+  & .icon {
+    font-size: 20px;
+  }
+}
+& .last {
+  border: none;
+}
+`;
+const Content = styled.div`
+width: 73%;
+border: ${styleVar.borderStyle};
+padding: 10px 0px;
+`;
+const Pagination = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+height: 150px;
+`;
+const AdvertisementPage = ({handleLogout}) => {
+ 
   return (
     <MainContainer>
       <AdvBanner text="advertisements" />
@@ -80,7 +82,7 @@ const AdvertisementPage = () => {
             </div>
             <div className="item last">
               <FiLogOut className="icon" />
-              <a href="/">Log out</a>
+              <Link to="/" onClick={()=> handleLogout()}>Log out</Link>
             </div>
           </SideBar>
           <Content>
