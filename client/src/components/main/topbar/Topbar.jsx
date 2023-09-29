@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./topbar.css";
 import logo from "../../../images/logo.png";
 import { GrFavorite } from "react-icons/gr";
@@ -22,7 +22,7 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-
+// ahmed 
 //////////////////////////////////////////////////////////////////////////////////////
 
 const Topbar = ({ lang, handelChangeLang }) => {
@@ -107,10 +107,10 @@ export default Topbar;
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+// buttonAppbar
 export function ButtonAppBar({handleShow}) {
   const navigate = useNavigate();
-
+const [newUser, setNewUser] = useState("");
   const user = useSelector((state) => state.user.userInfo);
   const dispatch = useDispatch();
   const handleLink = (nav) => {
