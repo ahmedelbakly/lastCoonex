@@ -1,5 +1,5 @@
 import React from "react";
-
+import "./searchBar.css"
 import styled from "styled-components";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { BiMap } from "react-icons/bi";
@@ -24,6 +24,7 @@ const SearchBar = ({top}) => {
     flex-direction: column;
   `;
   return (
+    <>
     <SearchCon className="searchCon">
       <div className="up">
         <form>
@@ -47,6 +48,13 @@ const SearchBar = ({top}) => {
         <SearchItem text="more" />
       </div>
     </SearchCon>
+
+
+   
+
+   
+    
+    </>
   );
 };
 

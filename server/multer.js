@@ -11,5 +11,5 @@ const storage = multer.diskStorage({
     }
   })
   
- export  const upload = multer({ storage: storage, limits : {fileSize : 30000000 } })
+ export  const upload = multer({ storage: storage})
  export const uploadMulti = upload.fields([{name:"logo",maxCount:1},{name:"proImg",maxCount:10}])

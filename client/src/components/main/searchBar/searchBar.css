@@ -13,6 +13,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 40px;
+  
 }
 
 .searchCon .up .inputCon {
@@ -46,4 +47,15 @@
   top: 25%;
   font-size: 20px;
   color: #8898aa;
+}
+
+.searchCon-res {
+  display: none !important;
+}
+
+@media only screen and (max-width: 912px) {
+  
+
+ 
+  
 }

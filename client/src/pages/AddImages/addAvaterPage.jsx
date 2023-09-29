@@ -42,7 +42,7 @@ const AddAvatarPage = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("img", file);
-    formData.append("id", user._id);
+    formData.append("id", localStorage.getItem("coonexUId"));
     axios
       .post("http://localhost:3001/user/avatar", formData)
       .then((res) => {

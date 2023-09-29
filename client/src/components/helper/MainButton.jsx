@@ -11,9 +11,9 @@ transition: all 0.5s;
   color: #fff;
 }
 `;
-const MainButton = ({ text, padding, size, click }) => {
+const MainButton = ({ text, padding, size, click,customClass }) => {
  
-  return <Button style={{padding:padding}} onClick={() => click()}>{text}</Button>;
+  return <Button className={customClass} style={{padding:padding}} onClick={() => click()}>{text}</Button>;
 };
 
 export default MainButton;

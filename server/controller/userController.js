@@ -157,6 +157,7 @@ export const updateBusUser = async (req, res, next) => {
 
 export const updateUserImage = async (req, res, next) => {
   const { id } = req.body;
+
   try {
     if (id && req.file.filename) {
       await User.findOneAndUpdate(

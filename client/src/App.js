@@ -1,6 +1,8 @@
 import "./App.css";
 import { Home } from "./pages/Home/Home";
 import Topbar from "./components/main/topbar/Topbar";
+import {ButtonAppBar} from "./components/main/topbar/Topbar";
+import {MenuList} from "./components/main/topbar/Topbar";
 import { useState } from "react";
 import Footer from "./components/main/footer/Bottom";
 import { useTranslation } from "react-i18next";
@@ -32,7 +34,7 @@ import axios from "axios";
 import { logOutUser, loginUser } from "./redux/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-
+// npm install @mui/material @mui/styled-engine-sc styled-components
 function App() {
   const user = useSelector((state) => state.user.userInfo);
   const dispatch = useDispatch();
@@ -89,6 +91,20 @@ function App() {
     setLang(lang === "en" ? "ar" : "en");
   };
 
+  /******************************************************************************* */
+  const [show, setShow] = useState(false);
+
+const handleClose = ()=>{
+  setShow(false)
+}
+
+const handleShow = ()=>{
+  setShow(true)
+}
+
+  /******************************************************************************* */
+
+
   return (
     <div
       className="App"
@@ -97,6 +113,8 @@ function App() {
     >
       <BrowserRouter>
         <Topbar lang={lang} handelChangeLang={handelChangeLang} />
+        <ButtonAppBar lang={lang} handelChangeLang={handelChangeLang} handleShow={handleShow}/>
+        <MenuList lang={lang} handelChangeLang={handelChangeLang}  show={show} handleClose={handleClose}/>
         <Routes className="routs">
           <Route path="/" element={<Home />} />
           <Route path="login" element={<LoginPage component={<Login />} />} />

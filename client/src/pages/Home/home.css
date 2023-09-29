@@ -34,3 +34,18 @@ position: relative;
   margin: auto;
   line-height: 30px; /* 187.5% */
 }
+
+
+@media only screen and (max-width: 920px) {
+ 
+.home-page .banner-text h2 {
+  font-size: 24px;
+ 
+}
+.home-page .banner-text p {
+  font-size: 16px;
+  max-width: 500px;
+  max-width: 400px;
+  margin: auto;
+}
+}

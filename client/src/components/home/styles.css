@@ -1,0 +1,8 @@
+@media only screen and (max-width: 920px) {
+.banner-home .banner-text h2 {
+ font: size 24px;   
+}
+.banner-home .tow-button {
+  left: 10%!important;
+}
+    }
