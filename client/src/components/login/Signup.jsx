@@ -20,14 +20,26 @@ const SignUp = () => {
     agree: false,
     confirmPassword: "",
   });
+  const [error, setError] = useState();
+
   console.log(signData);
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!signData.email || !signData.password || !signData.confirmPassword || !signData.username) {
+      return setError("Please fill all the fields");
+    }
+    if (signData.password !== signData.confirmPassword) {
+      return setError("Passwords do not match");
+      
+    }
     console.log(signData);
     axios
       .post("http://localhost:3001/user", signData)
       .then(function (response) {
         const data = response.data;
+        if (data.error) {
+          return setError(data.error);
+        }
         console.log(data);
         // localStorage.setItem("token", data.userToken);
         // localStorage.setItem("reToken", data.refreshToken);
@@ -48,10 +60,24 @@ const SignUp = () => {
   };
 
   return (
-    <SignContainer>
+    <SignContainer onClick={() => setError("")}>
       <div className="fromCon">
         <img src={loginLogo} alt="loginLogo" />
         <p className="formTitle">Sign up</p>
+        {error && (
+          <p
+            style={{
+              color: "red",
+              fontSize: "15px",
+              padding: "3px 0px",
+              width: "max-content",
+              textTransform: "capitalize",
+              marginTop: "-10px",
+            }}
+          >
+            {error}
+          </p>
+        )}
         <form onSubmit={handleSubmit}>
           <TextField
             fieldName="username"

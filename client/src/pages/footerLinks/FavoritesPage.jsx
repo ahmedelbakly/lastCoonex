@@ -10,9 +10,7 @@ import AdvBanner from "../../components/advertise/AdvBanner";
 import favCard from "../../images/favCard.png";
 import favCard2 from "../../images/favCard2.png";
 import BasicPagination from "../../components/main/Pagination";
-
-const FavoritesPage = () => {
-  const CardsBox = styled.div`
+const CardsBox = styled.div`
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -27,6 +25,8 @@ const FavoritesPage = () => {
     height: 150px;
   `;
   const Mission = styled.div``;
+const FavoritesPage = () => {
+  
   return (
     <>
       <AdvBanner text="Favorites" />

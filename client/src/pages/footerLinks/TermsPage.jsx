@@ -9,11 +9,11 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsCamera } from "react-icons/bs";
 import { styleVar } from "../../variableStyle";
 import Terms from "../../components/footerLinks/Terms";
-
+const Container = styled.div`
+background-color: #f6f9fb;
+`;
 const TermsPage = () => {
-  const Container = styled.div`
-    background-color: #f6f9fb;
-  `;
+ 
 
   return (
     <MainContainer>

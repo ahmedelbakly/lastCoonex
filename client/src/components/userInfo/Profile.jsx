@@ -11,6 +11,41 @@ import { useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logOutUser, loginUser } from "../../redux/userSlice";
 import { axiosExpire } from "../../axiosExpire";
+
+
+const ImageCon = styled.div`
+
+  width: 147px;
+  height: 147px;
+  border-radius: 50%;
+  position: relative;
+  margin: auto;
+  & .add-img {
+    display: none;
+  }
+  & img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+  & .conICon {
+    position: absolute;
+    top: 70%;
+    right: 5%;
+    background-color: ${styleVar.mainColor};
+    font-size: 25px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    & .icon {
+      color: white;
+    }
+  }
+`
+
 const FormCon = styled.div`
   width: 100%;
   display: flex;
@@ -19,37 +54,7 @@ const FormCon = styled.div`
   flex-direction: column;
   padding: 4%;
   gap: 20px;
-  & .imgCon {
-    width: 147px;
-    height: 147px;
-    border-radius: 50%;
-    position: relative;
-    margin: auto;
-    & .add-img {
-      display: none;
-    }
-    & img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-    }
-    & .conICon {
-      position: absolute;
-      top: 70%;
-      right: 5%;
-      background-color: ${styleVar.mainColor};
-      font-size: 25px;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 50%;
-      & .icon {
-        color: white;
-      }
-    }
-  }
+  & 
   & .passTitle {
     width: 100%;
     & h3 {
@@ -150,6 +155,10 @@ const Profile = () => {
   };
 
   /*//////////////////////////////////////////////////////////////////////////////*/
+  const [errorData, setErrorData] = useState("");
+  const [massageData, setMassageData] = useState("");
+
+  ////////////////////////////////////////////////////////////////////////////////////
   const [userData, setUserData] = useState({
     username: user.username,
     email: user.email,
@@ -158,6 +167,12 @@ const Profile = () => {
 
   const handleSubmitData = (e) => {
     e.preventDefault();
+    if (!userData.username || !userData.email || !userData.phone) {
+     setErrorData("Please fill all the fields");
+    } else {
+      console.log(userData);
+      
+    }
     axiosExpire
       .patch("http://localhost:3001/user", userData, {
         headers: {
@@ -166,7 +181,9 @@ const Profile = () => {
       })
       .then(function (response) {
         const data = response.data;
-        dispatch(loginUser(data));
+        console.log(data);
+        dispatch(loginUser(data.user));
+        setMassageData(data.massage);
       })
       .catch(function (error) {
         console.log(error);
@@ -182,9 +199,22 @@ const Profile = () => {
     password: "",
     confirmPass: "",
   });
+  const [errorPass, setErrorPass] = useState("");
+  const [massagePass, setMassagePass] = useState("");
+
   console.log(userPassData);
   const handleSubmitPass = (e) => {
     e.preventDefault();
+if (!userPassData.currentPassword || !userPassData.password || !userPassData.confirmPass) {
+    return  setErrorPass("Please fill all the fields");
+    }
+if ( userPassData.password !== userPassData.confirmPass) {
+    return  setErrorPass(`Passwords do not match`);
+    }
+if ( userPassData.password.length < 8) {
+    return  setErrorPass(` "password must be at least 8 characters"`);
+    }
+  
 
     axiosExpire
       .patch("http://localhost:3001/user/pass", userPassData, {
@@ -194,7 +224,11 @@ const Profile = () => {
       })
       .then(function (response) {
         const data = response.data;
-       console.log(data);
+        if (data.error) {
+          return setErrorPass(data.error);
+        }
+        setMassagePass(data.massage);
+      
       })
       .catch(function (error) {
         console.log(error);
@@ -236,22 +270,38 @@ const Profile = () => {
   //////////////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <FormCon>
-      <div className="imgCon">
+    <>
+    <ImageCon >
         <img src={`http://localhost:3001/images/${user.image}`} alt="" />
         <div className="conICon">
           <BsCamera className="icon" onClick={() => handleLink("/avatar")} />
-          {/*  <label>
-            <input className="add-img" type="file" name="" id="" onChange={(e)=>{
-              handleChangeImg(e)
-              handleUpload()
-            }} />
-           
-          </label>*/}
         </div>
-      </div>
+      </ImageCon>
+    <FormCon onClick={()=>{
+      setErrorPass("")
+      setErrorPass("")
+      setErrorData("")
+      setMassageData("")
+    }}>
+      
       {/*///////////////////////////////////////////////////////////////////////////*/}
       <form className="data" onSubmit={handleSubmitData}>
+      {errorData && (
+          <p
+            style={{
+              color: "red",
+              fontSize: "15px",
+              padding: "3px 0px",
+              width: "max-content",
+              textTransform: "capitalize",
+              marginTop: "-10px",
+              marginRight:"auto"
+              
+            }}
+          >
+            {errorData}
+          </p>
+        )}
         <InputsContainer>
           <TextFieldCon className="input-con">
             <p>Username</p>
@@ -291,6 +341,22 @@ const Profile = () => {
             <input type="" id="" placeholder="e.g. 2000 Sqft House for Sale" />
           </TextFieldCon>
         </InputsContainer>
+        {massageData && (
+          <p
+            style={{
+              color: "red",
+              fontSize: "15px",
+              padding: "3px 0px",
+              width: "max-content",
+              textTransform: "capitalize",
+              marginTop: "-10px",
+              marginRight:"auto"
+              
+            }}
+          >
+            {massageData}
+          </p>
+        )}
         <input className="submit" type="submit" value="save change" />
       </form>
 
@@ -299,6 +365,22 @@ const Profile = () => {
       <div className="passTitle">
         <h3>Change Password</h3>
       </div>
+      {errorPass && (
+          <p
+            style={{
+              color: "red",
+              fontSize: "15px",
+              padding: "3px 0px",
+              width: "max-content",
+              textTransform: "capitalize",
+              marginTop: "-10px",
+              marginRight:"auto"
+              
+            }}
+          >
+            {errorPass}
+          </p>
+        )}
       <form className="password" onSubmit={handleSubmitPass}>
         <InputsContainer>
           <TextFieldCon className="input-con">
@@ -312,7 +394,7 @@ const Profile = () => {
                 value={userPassData.currentPassword}
                 onChange={handleChangePass}
               />
-              {setShowPass1 ? (
+              {showPass1 === true ? (
                 <AiOutlineEyeInvisible
                   className="icon"
                   onClick={handleShowPass1}
@@ -333,13 +415,13 @@ const Profile = () => {
                 value={userPassData.password}
                 onChange={handleChangePass}
               />
-              {setShowPass2 ? (
-                <AiOutlineEye className="icon" onClick={handleShowPass2} />
-              ) : (
+              {showPass2 ? (
                 <AiOutlineEyeInvisible
-                  className="icon"
-                  onClick={handleShowPass2}
-                />
+                className="icon"
+                onClick={handleShowPass2}
+              />
+            ) : (
+              <AiOutlineEye className="icon" onClick={handleShowPass2} />
               )}
             </div>
           </TextFieldCon>
@@ -354,21 +436,37 @@ const Profile = () => {
                 value={userPassData.confirmPass}
                 onChange={handleChangePass}
               />
-              {setShowPass3 ? (
-                <AiOutlineEyeInvisible
-                  className="icon"
-                  onClick={handleShowPass3}
-                />
-              ) : (
-                <AiOutlineEye className="icon" onClick={handleShowPass3} />
+              {showPass3 ? (
+               <AiOutlineEyeInvisible
+               className="icon"
+               onClick={handleShowPass3}
+             />
+           ) : (
+             <AiOutlineEye className="icon" onClick={handleShowPass3} />
               )}
             </div>
           </TextFieldCon>
         </InputsContainer>
-
+        {massagePass && (
+          <p
+            style={{
+              color: "red",
+              fontSize: "15px",
+              padding: "3px 0px",
+              width: "max-content",
+              textTransform: "capitalize",
+              marginTop: "-10px",
+              marginRight:"auto"
+              
+            }}
+          >
+            {massagePass}
+          </p>
+        )}
         <input className="submit" type="submit" value="save change" />
       </form>
     </FormCon>
+    </>
   );
 };
 

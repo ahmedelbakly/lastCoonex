@@ -128,12 +128,10 @@ const Advertisement = () => {
 };
 
 export default Advertisement;
-
-const Card = () => {
-  const Container = styled.div`
+const Container2 = styled.div`
     width: 32%;
     height: 370px;
-    border: ${styleVar.borderStyle};
+   
     border-radius: 10px;
 
     & .imgCon {
@@ -185,7 +183,7 @@ const Card = () => {
       font-size: 10px;
       font-weight: 400;
       padding-bottom: 10px;
-      border-bottom: ${styleVar.borderStyle};
+      
     }
     & .numData {
       width: 100%;
@@ -206,8 +204,10 @@ const Card = () => {
     }
   `;
 
+const Card = () => {
+  
   return (
-    <Container>
+    <Container2 style={{border: styleVar.borderStyle}}>
       <div className="imgCon">
         <img src={proAver} alt="" />
       </div>
@@ -217,7 +217,7 @@ const Card = () => {
        <FiMoreHorizontal  className="list"/>
         </div>
         <h3>Al Khaleej Village, Al...</h3>
-        <p className="description">
+        <p className="description" style={{ borderBottom: styleVar.borderStyle}}>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
           mod tempor.
         </p>
@@ -234,6 +234,6 @@ const Card = () => {
           <p>1000</p>
         </div>
       </div>
-    </Container>
+    </Container2>
   );
 };

@@ -152,7 +152,7 @@ const CreateAddTwo = ({
         </TextFieldCon>
         <TextField
           fieldName="Surface area *"
-          options={[100, 150, 200, 300, 400, 500, 600, 700, 800, 900, 1000]}
+          options={[ "",100, 150, 200, 300, 400, 500, 600, 700, 800, 900, 1000]}
           change={handleSelect}
           name="surfaceArea"
         />
@@ -171,19 +171,19 @@ const CreateAddTwo = ({
 
         <TextField
           fieldName="Baths*"
-          options={[1, 2, 3, 4, 5]}
+          options={["",1, 2, 3, 4, 5]}
           change={handleSelect}
           name="paths"
         />
         <TextField
           fieldName="Rooms *"
-          options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+          options={["",1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
           change={handleSelect}
           name="rooms"
         />
         <TextField
           fieldName="Floor *"
-          options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
+          options={["",1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
           change={handleSelect}
           name="floor"
         />

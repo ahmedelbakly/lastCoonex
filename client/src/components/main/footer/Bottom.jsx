@@ -9,6 +9,7 @@ import { AiFillFacebook } from "react-icons/ai";
 import { BsFillArrowRightSquareFill } from "react-icons/bs";
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 const Footer = ({lang}) => {
  
   const { i18n, t } = useTranslation();
@@ -21,32 +22,35 @@ const Footer = ({lang}) => {
   {t("bottomText")}
           </p>
         </div>
+        <div className="list-container">
         <div className="Quick Links  list">
           {" "}
           <p className="p">{t("QuickLinks")}</p>
-          <a href="/">{t("home")}</a>
-          <a href="/">{t("About")}</a>
-          <a href="/">{t("Contact")}</a>
-          <a href="/">{t("FAQs")}</a>
+          <Link to="/">{t("home")}</Link>
+          <Link to="/about">{t("About")}</Link>
+          <Link to="/contactUs">{t("Contact")}</Link>
+          <Link to="/fqa">{t("FAQs")}</Link>
         </div>
         <div className="Countries list">
           <p className="p">{t("Countries")}</p>
-          <a href="/">{t("SaudiArabia")}</a>
-          <a href="/">{t("UAE")}</a>
-          <a href="/">{t("Egypt")}</a>
+          <Link to="/">{t("SaudiArabia")}</Link>
+          <Link to="/">{t("UAE")}</Link>
+          <Link to="/">{t("Egypt")}</Link>
         </div>
         <div className="Support list">
           <p className="p">{t("Support")}</p>
-          <a href="/">{t("Help")}</a>
-          <a href="/">{t("TermsConditions")}</a>
-          <a href="/">{t("Privacy")}</a>
+          <Link to="/">{t("Help")}</Link>
+          <Link to="/terms">{t("TermsConditions")}</Link>
+          <Link to="/privacy">{t("Privacy")}</Link>
         </div>
+        </div>
+        
         <div className="Subscribe">
           <p className="p">{t("Subscribe")}</p>
           <form>
             <input type="email" name="" id="" placeholder={t("writeEmail")} />
             <button type="submit">
-    {lang === "en"?  <BsFillArrowRightSquareFill className="icon" />  : <BsFillArrowLeftSquareFill className="icon" />  }  
+    {lang === "en"?  <BsFillArrowRightSquareFill className="icon"  />  : <BsFillArrowLeftSquareFill className="icon" />  }  
             </button>
           </form>
         </div>

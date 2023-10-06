@@ -4,7 +4,67 @@ import MainContainer from "../main/Container";
 import SubButton from "../main/SubButton";
 import phonoLogo from "../../images/phonoLogo.png";
 import phonoLogo2 from "../../images/phonoLogo2.png";
-
+const Banner3 = styled.div`
+    height: 422px;
+    width: 100%;
+    position: relative;
+    border-radius: 10px;
+    background: #f7f7f7;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    & .vector1 svg {
+      width: 450.353px;
+      height: 400.989px;
+      /* transform: rotate(-29.601deg); */
+      position: absolute;
+      right: -25px;
+      bottom: -30px;
+      z-index: 0;
+      fill: #6449e7;
+      /* opacity: 0.05; */
+    }
+  `;
+  const BannerText = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-left: 70px;
+    color: black;
+    z-index: 2;
+    gap: 5px;
+    text-align: left;
+    width: 480px;
+    & button {
+      font-size: 14px;
+      height: max-content;
+      border: none;
+      background-color: none;
+      color: #b49668;
+      text-transform: capitalize;
+      font-weight: 600;
+    }
+    & h2 {
+      font-weight: 700;
+      font-size: 32px;
+      height: max-content;
+    }
+    & p {
+      font-weight: 400;
+      font-size: 16px;
+      color: #8898aa;
+      text-transform: capitalize;
+    }
+    & .btn-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 30px;
+    }
+  `;
 const HomeBanner3 = () => {
   const googleIcon = (
     <svg
@@ -67,67 +127,7 @@ const HomeBanner3 = () => {
     </svg>
   );
 
-  const Banner3 = styled.div`
-    height: 422px;
-    width: 100%;
-    position: relative;
-    border-radius: 10px;
-    background: #f7f7f7;
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    & .vector1 svg {
-      width: 450.353px;
-      height: 400.989px;
-      /* transform: rotate(-29.601deg); */
-      position: absolute;
-      right: -25px;
-      bottom: -30px;
-      z-index: 0;
-      fill: #6449e7;
-      /* opacity: 0.05; */
-    }
-  `;
-  const BannerText = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    flex-direction: column;
-    padding-left: 70px;
-    color: black;
-    z-index: 2;
-    gap: 5px;
-    text-align: left;
-    width: 480px;
-    & button {
-      font-size: 14px;
-      height: max-content;
-      border: none;
-      background-color: none;
-      color: #b49668;
-      text-transform: capitalize;
-      font-weight: 600;
-    }
-    & h2 {
-      font-weight: 700;
-      font-size: 32px;
-      height: max-content;
-    }
-    & p {
-      font-weight: 400;
-      font-size: 16px;
-      color: #8898aa;
-      text-transform: capitalize;
-    }
-    & .btn-container {
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 30px;
-    }
-  `;
+  
   return (
     <MainContainer customClass="Banner4-container" padding="32px 50px">
       <Banner3>
@@ -138,7 +138,7 @@ const HomeBanner3 = () => {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eius
             mod tempor incididunt.
           </p>
-          <div class="btn-container">
+          <div className="btn-container">
             <SubButton
               text="App Store"
               icon={googleIcon}
@@ -162,9 +162,7 @@ const HomeBanner3 = () => {
 };
 
 export default HomeBanner3;
-
-const Phone1 = ({ rotate, index, top, right }) => {
-  const PhoneStyle = styled.div`
+const PhoneStyle = styled.div`
     width: 168px;
     height: 352px;
     fill: #fff;
@@ -176,10 +174,6 @@ const Phone1 = ({ rotate, index, top, right }) => {
     border-bottom: 50px solid black;
     display: flex;
     align-items: center;
-    right: ${right};
-    top: ${top};
-    z-index: ${index};
-    rotate: ${rotate};
     background: #fff;
 
     & .curricle {
@@ -238,9 +232,11 @@ const Phone1 = ({ rotate, index, top, right }) => {
       transform: translate(-50%, -50%);
     }
   `;
+const Phone1 = ({ rotate, index, top, right }) => {
+  
 
   return (
-    <PhoneStyle>
+    <PhoneStyle style={{ rotate: rotate, top: top, right: right, zIndex: index }}>
       <span className="curricle"></span>
       <span className="small-dote"></span>
       <div>
@@ -256,8 +252,9 @@ const Phone1 = ({ rotate, index, top, right }) => {
     </PhoneStyle>
   );
 };
-const Phone2 = ({ rotate, index, top, right }) => {
-  const PhoneStyle = styled.div`
+
+
+const PhoneStyle2 = styled.div`
     width: 152px;
     height: 320px;
     fill: #fff;
@@ -270,10 +267,6 @@ const Phone2 = ({ rotate, index, top, right }) => {
     display: flex;
     align-items: center;
     justify-content: center;
-    right: ${right};
-    top: ${top};
-    z-index: ${index};
-    rotate: ${rotate};
     background: #fff;
 
     & .curricle {
@@ -334,9 +327,11 @@ const Phone2 = ({ rotate, index, top, right }) => {
       rotate: 5deg;
     }
   `;
+const Phone2 = ({ rotate, index, top, right }) => {
+  
 
   return (
-    <PhoneStyle>
+    <PhoneStyle2 style={{ rotate: rotate, top: top, right: right, zIndex: index }}>
       <span className="curricle"></span>
       <span className="small-dote"></span>
       <div>
@@ -349,6 +344,6 @@ const Phone2 = ({ rotate, index, top, right }) => {
       <span className="volumeDown"></span>
       <span className="upVolume"></span>
       <img src={phonoLogo} alt="logo" />
-    </PhoneStyle>
+    </PhoneStyle2>
   );
 };

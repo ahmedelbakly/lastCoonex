@@ -1,10 +1,7 @@
 
 import React from "react";
 import styled from "styled-components"
-
-const Terms = () => {
- 
-  const NotContainer = styled.div`
+const NotContainer = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
@@ -17,7 +14,17 @@ const Terms = () => {
     color: #8898aa;
     font-size: 16px;
     font-weight: 400;
+    transition: all 0.3s;
+    padding: 5px 10px;
+    border-radius: 5px;
+    &:hover {
+      background: #000;
+
+    }
   `;
+const Terms = () => {
+ 
+  
 
   return (
    

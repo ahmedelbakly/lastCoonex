@@ -17,12 +17,14 @@ export const createUser = async (req, res, next) => {
   console.log(req.body);
   try {
     if ((username && email && password, agree)) {
-      console.log(username, email, password);
       const user =
         (await User.findOne({ email: email })) ||
         (await UserCompany.findOne({ email: email }));
       if (user) {
-        return res.json("this email is register as person");
+        return res.json({ error: "this email is registered" });
+      }
+      if (password.length < 8) {
+        return res.json({ error: "password must be at least 8 characters" });
       }
 
       const hash = bcrypt.hashSync(password, salt);
@@ -41,7 +43,7 @@ export const createUser = async (req, res, next) => {
 
       res.json(userCreated);
     } else {
-      res.json(req.body);
+      return res.json({ error: "all fields are required" });
     }
   } catch (error) {
     console.log(error);
@@ -65,8 +67,8 @@ export const updateUser = async (req, res, next) => {
         }
       );
       const user = await User.findOne({ _id: id });
-      console.log(user);
-      await res.json(user);
+      
+      await res.json({user: user, massage: "update successfully"});
     } else {
       res.json("data is error");
     }
@@ -79,20 +81,22 @@ export const updateUser = async (req, res, next) => {
 export const updateUserPass = async (req, res, next) => {
   const { password, currentPassword } = req.body;
   const { id } = req.user;
-  console.log(password, currentPassword, id);
   try {
     if (id && currentPassword && password) {
-      const user = await User.findOne({ _id: id });
-      console.log(user);
+      const user =
+        (await User.findOne({ _id: id })) ||
+        (await UserCompany.findOne({ _id: id }));
 
       if (bcrypt.compare(currentPassword, user.password)) {
         const passHash = await bcrypt.hash(password, salt);
         user.password = passHash;
         await user.save();
-        res.json("set new password");
+        return res.json({ massage: "set password successfully" });
+      } else {
+        return res.json({ error: "current password is incorrect" });
       }
     } else {
-      res.json(req.body);
+      return res.json({ error: "all filed is required" });
     }
   } catch (error) {
     console.log(error);
@@ -191,7 +195,7 @@ export const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     if (!(email && password)) {
-      return res.json("all fields is required");
+      res.json({ error: "email and password is required" });
     } else {
       const user =
         (await User.findOne({ email: email })) ||
@@ -199,9 +203,7 @@ export const loginUser = async (req, res, next) => {
 
       if (user) {
         if (!user.active) {
-          return res.json(
-            "your account not active, please check your email to active your account"
-          );
+          return res.json({ error: "this account is not active" });
         }
 
         if (await bcrypt.compare(password, user.password)) {
@@ -216,7 +218,6 @@ export const loginUser = async (req, res, next) => {
             process.env.JWT_SECRET_REFRESH_EXPIRE
           );
 
-        
           user.refreshToken = refreshToken;
           await user.save();
 
@@ -227,14 +228,14 @@ export const loginUser = async (req, res, next) => {
             refreshTokens,
           });
         } else {
-          return res.json("password is incorrect");
+          return res.json({ error: "password is incorrect" });
         }
       } else {
-        return res.json("this email is not registered");
+        return res.json({ error: "this email is not register" });
       }
     }
   } catch (error) {
-    return res.json("all fields is required");
+    return res.json("error");
   }
 };
 
@@ -282,39 +283,36 @@ export const createRefreshToken = async (req, res, next) => {
 };
 
 export const getUser = async (req, res, next) => {
-const {id} = req.user;
-console.log("############",id)
-try {
-  const user =
-  (await User.findOne({ _id: id })) ||
-  (await UserCompany.findOne({ _id: id }));
-  if (user) {
-    const token = generateToken(
-      user,
-      process.env.JWT_SECRET_ACCESS,
-      process.env.JWT_SECRET_ACCESS_EXPIRE
-    );
-    const refreshToken = generateToken(
-      user,
-      process.env.JWT_SECRET_REFRESH,
-      process.env.JWT_SECRET_REFRESH_EXPIRE
-    );
+  const { id } = req.user;
+  console.log("############", id);
+  try {
+    const user =
+      (await User.findOne({ _id: id })) ||
+      (await UserCompany.findOne({ _id: id }));
+    if (user) {
+      const token = generateToken(
+        user,
+        process.env.JWT_SECRET_ACCESS,
+        process.env.JWT_SECRET_ACCESS_EXPIRE
+      );
+      const refreshToken = generateToken(
+        user,
+        process.env.JWT_SECRET_REFRESH,
+        process.env.JWT_SECRET_REFRESH_EXPIRE
+      );
 
-  
-    user.refreshToken = refreshToken;
-    await user.save();
+      user.refreshToken = refreshToken;
+      await user.save();
 
-    return res.json({
-      userToken: `Bearer ${token}`,
-      refreshToken: refreshToken,
-      user: user,
-  
-    });
+      return res.json({
+        userToken: `Bearer ${token}`,
+        refreshToken: refreshToken,
+        user: user,
+      });
+    }
+  } catch (error) {
+    console.log(error);
   }
-} catch (error) {
-  console.log(error);
-}
-
 };
 
 // ********

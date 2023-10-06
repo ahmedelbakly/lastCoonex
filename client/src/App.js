@@ -32,18 +32,23 @@ import AddAvatarPage from "./pages/AddImages/addAvaterPage";
 import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { logOutUser, loginUser } from "./redux/userSlice";
+import {setRentProCom,setRentProRes,setSaleProCom,setSaleProRes,setAllProducts} from "./redux/productSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import ScrollToTop from "./components/helper/scroll";
 // npm install @mui/material @mui/styled-engine-sc styled-components
 function App() {
   const user = useSelector((state) => state.user.userInfo);
+  const products = useSelector((state) => state.product.searchProducts);
   const dispatch = useDispatch();
   console.log();
   const { i18n, t } = useTranslation();
   const [lang, setLang] = useState("en");
 
-  console.log(user);
+  console.log(products);
   const [massage, setMassage] = useState("");
+  const [route, setRoute] = useState("searchSale");
+  console.log(route);
   //************************************************************************************** */
   const handleLogout = () => {
     dispatch(logOutUser());
@@ -78,8 +83,35 @@ function App() {
   };
 
   //************************************************************************************** */
+  //************************************************************************************** */
+  const getProduct = () => {
+    axios
+      .get("http://localhost:3001/getProduct", {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("reToken")}`,
+        },
+      })
+      .then(function (response) {
+        const data = response.data;
+       console.log(data);
+        dispatch(setRentProRes(data.rentProRes));
+        dispatch(setRentProCom(data.rentProCom));
+        dispatch(setSaleProRes(data.saleProRes));
+        dispatch(setSaleProCom(data.saleProCom));
+        dispatch(setAllProducts(data.allProducts));
+        
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  //************************************************************************************** */
   useEffect(() => {
+    getProduct()
     getUser()
+   
+    
   },[]);
   //************************************************************************************** */
   // create CreateRefreshToken to create new valid access token by refresh token
@@ -112,11 +144,12 @@ const handleShow = ()=>{
       lang={lang === "en" ? "en" : "ar"}
     >
       <BrowserRouter>
+      <ScrollToTop />
         <Topbar lang={lang} handelChangeLang={handelChangeLang} />
         <ButtonAppBar lang={lang} handelChangeLang={handelChangeLang} handleShow={handleShow}/>
         <MenuList lang={lang} handelChangeLang={handelChangeLang}  show={show} handleClose={handleClose}/>
         <Routes className="routs">
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home route={route} setRoute={setRoute}/>} />
           <Route path="login" element={<LoginPage component={<Login />} />} />
           <Route path="signup" element={<LoginPage component={<Signup />} />} />
           <Route
@@ -127,7 +160,7 @@ const handleShow = ()=>{
             path="confirmPass"
             element={<LoginPage component={<ConfirmLoginTwo />} />}
           />
-          <Route path="search" element={<MapSearchPage />} />
+          <Route path="search" element={<MapSearchPage setRoute={setRoute}  route={route}/>} />
           <Route path="productInfo/:id" element={<ProductInfoPage />} />
           <Route path="slider" element={<Slider />} />
           <Route path={"advertise/rent"} element={<AdvertisePageRent />} />

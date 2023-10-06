@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components"
 import { BsChevronDoubleLeft, BsChevronDoubleRight } from "react-icons/bs";
 import product from "../../images/product.png";
-const Slider = () => {
-  const SliderContainer = styled.div`
+const SliderContainer = styled.div`
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -69,6 +68,8 @@ const Slider = () => {
       }
     }
   `;
+const Slider = () => {
+  
   return (
     <SliderContainer>
       <SlideSubCon>

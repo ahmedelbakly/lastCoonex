@@ -9,12 +9,12 @@ import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsCamera } from "react-icons/bs";
 import { styleVar } from "../../variableStyle";
 import Privacy from "../../components/footerLinks/Privacy";
+const Container = styled.div`
+background-color: #f6f9fb;
+`;
 
 const PrivacyPage = () => {
-  const Container = styled.div`
-    background-color: #f6f9fb;
-  `;
-
+ 
   return (
     <MainContainer>
       <AdvBanner text="Privacy Policy" />

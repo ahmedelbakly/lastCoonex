@@ -38,13 +38,13 @@ const CreateAddOne = ({
         </TextFieldCon>
         <TextField
           fieldName="Property Type *"
-          options={["villa","house","flat","roof"]}
+          options={["","villa","house","apartment","roof"]}
           change={handleSelect}
           name="propertyType"
         />
         <TextField
           fieldName="Category *"
-          options={["rent","sale"]}
+          options={["","commercial","residential"]}
           change={handleSelect}
           name="category"
         />

@@ -2,9 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import loginPanner from "../../images/loginPanner.png";
 import loginLogo from "../../images/loginLogo.png";
-
-const ConfirmLoginOne = () => {
-  const LoginContainer = styled.div`
+const LoginContainer = styled.div`
     width: 870px;
     height: 450px;
     background: white;
@@ -123,6 +121,8 @@ const ConfirmLoginOne = () => {
       }
     }
   `;
+const ConfirmLoginOne = () => {
+  
   return (
     <LoginContainer>
       <div className="fromCon">

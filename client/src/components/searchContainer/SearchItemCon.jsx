@@ -4,18 +4,9 @@ import { BsListUl } from "react-icons/bs";
 import { FaMapMarkedAlt } from "react-icons/fa";
 import MainContainer from "../main/Container";
 import CardContainer from "../helper/CardContainer";
-
-const SearchContainer = ({
-  arrayItem,
-  buttonsArray,
-  text,
-  handleItemShow,
-  cardWidth,
-  padding,
-  justify,
-  itemShow
-}) => {
-  const TextAndButton = styled.div`
+import { useDispatch, useSelector } from "react-redux";
+import CardContainer3 from "../helper/cardcon3";
+const TextAndButton = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -70,10 +61,22 @@ const SearchContainer = ({
     }
   `;
 
+const SearchContainer = ({
+  text,
+  handleItemShow,
+  cardWidth,
+  padding,
+  justify,
+  itemShow
+}) => {
+
+  const products = useSelector((state) => state.product.searchProducts);
+ 
+  
   return (
     <MainContainer customClass="" padding={padding}>
       <TextAndButton>
-        <p className="title">{text}</p>
+        <p className="title">{`Residential for rent ${products.length}  results`}</p>
         <div className="icons">
           <FaMapMarkedAlt
             className={`icon ${itemShow === "withMap" ? "active" : ""}` }
@@ -90,7 +93,7 @@ const SearchContainer = ({
         </div>
       </TextAndButton>
 
-      <CardContainer justify={justify} cardWidth={cardWidth} />
+      <CardContainer3 justify={justify} cardWidth={cardWidth} products={products} />
       <SeeMore>
         <button>Load More</button>
       </SeeMore>

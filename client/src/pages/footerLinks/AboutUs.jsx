@@ -5,8 +5,7 @@ import vision from "../../images/vision.png";
 import mission1 from "../../images/mission1.png";
 import mission2 from "../../images/mission2.png";
 import AdvBanner from "../../components/advertise/AdvBanner";
-const AboutUsPage = () => {
-  const Vision = styled.div`
+const Vision = styled.div`
     width: 100%;
     height: 348px;
     display: flex;
@@ -86,6 +85,8 @@ const AboutUsPage = () => {
       }
     }
   `;
+const AboutUsPage = () => {
+  
   return (
 <>
 <AdvBanner text="About Us" />

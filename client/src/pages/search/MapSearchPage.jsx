@@ -7,8 +7,7 @@ import MapGoogle from "../../components/googleMap/Map";
 import Banner from "../../components/home/Banner";
 import SearchBar from "../../components/main/searchBar/SearchBar";
 import adver from "../../images/adver.png";
-const MapSearchPage = () => {
-  const Links = styled.div`
+const Links = styled.div`
     width: 100%;
     padding: 0px 50px;
     background: #f7f7f7;
@@ -25,7 +24,7 @@ const MapSearchPage = () => {
     height: 189px;
     position: absolute;
     top: 10%;
-    background-image: url(${adver});
+   
     background-size: cover;
   `;
   const SearchContainerMap = styled.div`
@@ -47,6 +46,8 @@ const MapSearchPage = () => {
       border: 3px solid black;
     }
   `;
+const MapSearchPage = ({route,setRoute}) => {
+  
   const [itemShow, setItemShow] = useState("withMap");
 
   const handleItemShow = (value) => setItemShow(value);
@@ -57,9 +58,9 @@ const MapSearchPage = () => {
         <a  href ="/"> home{`>>`} </a>
         <a  href="/">searchResult </a>
       </Links>
-      <Banner height="400px" overlay={false} topButton="60%">
-        <Adver></Adver>
-        <SearchBar top="80%" />
+      <Banner height="400px" overlay={false} topButton="60%"  route={route} setRoute={setRoute}>
+        <Adver style={{ backgroundImage: `url(${adver})`}}></Adver>
+        <SearchBar top="80%"  route={route}/>
       </Banner>
       {itemShow === "twoSlide" && (
         <SearchContainerTwo
@@ -83,6 +84,7 @@ const MapSearchPage = () => {
               justify="space-between"
               cardWidth="49%"
               itemShow={itemShow}
+              route={route}
             />
           </div>
         </SearchContainerMap>
@@ -96,6 +98,7 @@ const MapSearchPage = () => {
           justify="space-between"
           cardWidth="32.5%"
           itemShow={itemShow}
+          route={route}
         />
       )}
     </>

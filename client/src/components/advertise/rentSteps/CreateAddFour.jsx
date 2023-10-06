@@ -31,6 +31,7 @@ const Advantage = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-start;
+  flex-wrap: wrap;
   align-items: center;
   padding: 10px 20px;
   gap: 50px;
@@ -123,49 +124,35 @@ const CreateAddFour = ({
   productRentData,
   setProductRentData,
   handleSubmit,
-
 }) => {
   const handleSelect = (e, name) => {
-    setProductRentData({
-      ...productRentData,
-      unitDetails: [...productRentData.unitDetails, e.target.value],
-    });
+    if (!productRentData.unitDetails.includes(e.target.value)) {
+      setProductRentData({
+        ...productRentData,
+        unitDetails: [...productRentData.unitDetails, e.target.value],
+      });
+      
+    }
+    
   };
   return (
     <Container>
       <InputsContainer>
         <TextField
           fieldName="Building Age"
-          options={["prop1", "prop2", "prop3", "prop4", "prop5"]}
+          options={["", "prop1", "prop2", "prop3", "prop4", "prop5"]}
           change={handleSelect}
           name="furnished"
         />
       </InputsContainer>
       <Advantage>
-        <div className="item">
-          <p>Body soap</p>
+       { productRentData.unitDetails.length > 0 &&
+        productRentData.unitDetails.map((item,index)=>(
+        <div key={index} className="item">
+          <p>{item}</p>
           <MdOutlineClose className="icon" />
         </div>
-        <div className="item">
-          <p>Body soap</p>
-          <MdOutlineClose className="icon" />
-        </div>
-        <div className="item">
-          <p>Body soap</p>
-          <MdOutlineClose className="icon" />
-        </div>
-        <div className="item">
-          <p>Body soap</p>
-          <MdOutlineClose className="icon" />
-        </div>
-        <div className="item">
-          <p>Body soap</p>
-          <MdOutlineClose className="icon" />
-        </div>
-        <div className="item">
-          <p>Body soap</p>
-          <MdOutlineClose className="icon" />
-        </div>
+        ) )}
       </Advantage>
       <ButtonsContainer>
         <div className="leftCon">

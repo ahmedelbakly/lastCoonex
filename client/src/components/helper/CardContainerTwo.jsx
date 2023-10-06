@@ -1,17 +1,17 @@
 import React from "react";
 import styled from "styled-components"
 import CardTwo from "./CardTwo";
+const CardsBox = styled.div`
+width: 100%;
+display: flex;
 
+align-items: center;
+flex-wrap: wrap;
+gap: 20px;
+`;
 const CardContainerTwo= ({justify}) => {
-  const CardsBox = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: ${justify};
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-  `;
-  return <CardsBox>
+ 
+  return <CardsBox style={{justifyContent:justify}}>
   
   <CardTwo/>
   <CardTwo/>

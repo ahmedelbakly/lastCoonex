@@ -23,19 +23,12 @@ export const createAdForSale = async (req, res, next) => {
     paymentMethod,
     furnished,
     mortgaged,
-  
-   
   } = JSON.parse(req.body.ads);
-
-  req.files &&
-    req.files.proImg.map(
-      (file, index) => (productImg = [...productImg, file.filename])
-    );
 
   try {
     if (
       title &&
-       userId &&
+      userId &&
       videoLink &&
       propertyType &&
       category &&
@@ -53,9 +46,13 @@ export const createAdForSale = async (req, res, next) => {
       mortgaged &&
       req.files
     ) {
-      console.log("hdgggggggggggggggffffffffffffffffffffff");
+      req.files &&
+        req.files.proImg.map(
+          (file, index) => (productImg = [...productImg, file.filename])
+        );
+
       await AdForSale.create({
-        userId:userId,
+        userId: userId,
         title: title,
         videoLink: videoLink,
         propertyType: propertyType,
@@ -75,11 +72,17 @@ export const createAdForSale = async (req, res, next) => {
         projectedBy: req.files.logo[0].filename,
         images: productImg,
       });
-      const allAds = await AdForSale.find();
+     
+      const saleProCom = await AdForSale.find({ category: "commercial" });
+      const saleProRes = await AdForSale.find({ category: "residential" });
+      const rentProRes = await AdForRent.find({ category: "residential" });
+      const rentProCom = await AdForRent.find({ category: "commercial" });
+      const allProducts = [...rentProRes, ...rentProCom, ...saleProRes, ...saleProCom];
 
-      res.json(allAds);
+      console.log({ saleProCom,saleProRes,allProducts, massage: " save success in database" });
+      res.json({ saleProCom,saleProRes,allProducts, massage: " save success in database" });
     } else {
-      res.json({ body: req.body.ads, productImg });
+      res.json({ error: "all fields is required" });
     }
   } catch (error) {
     console.log(error);
@@ -112,37 +115,36 @@ export const createAdForRent = async (req, res, next) => {
     projectedBy,
     unitDetails,
   } = JSON.parse(req.body.ads);
-  req.files &&
-    req.files.proImg.map(
-      (file, index) => (productImg = [...productImg, file.filename])
-    );
 
   try {
     if (
-      title &&
-      userId,
+      (title && userId,
       videoLink &&
-      propertyType &&
-      category &&
-      description &&
-      city &&
-      price &&
-      rooms &&
-      surfaceArea &&
-      paths &&
-      floor &&
-      buildingAge &&
-      listerType &&
-      paymentMethod &&
-      furnished &&
-      mortgaged &&
-      unitDetails &&
-      req.files
+        propertyType &&
+        category &&
+        description &&
+        city &&
+        price &&
+        rooms &&
+        surfaceArea &&
+        paths &&
+        floor &&
+        buildingAge &&
+        listerType &&
+        paymentMethod &&
+        furnished &&
+        mortgaged &&
+        unitDetails &&
+        req.files)
     ) {
-      console.log("hdgggggggggggggggffffffffffffffffffffff");
+      req.files &&
+        req.files.proImg.map(
+          (file, index) => (productImg = [...productImg, file.filename])
+        );
+
       await AdForRent.create({
         title: title,
-        userId:userId,
+        userId: userId,
         videoLink: videoLink,
         propertyType: propertyType,
         category: category,
@@ -162,12 +164,42 @@ export const createAdForRent = async (req, res, next) => {
         images: productImg,
         unitDetails: unitDetails,
       });
-      const allAds = await AdForRent.find();
-
-      res.json(allAds);
+      const rentProRes = await AdForRent.find({ category: "residential" });
+      const rentProCom = await AdForRent.find({ category: "commercial" });
+      const saleProCom = await AdForSale.find({ category: "commercial" });
+      const saleProRes = await AdForSale.find({ category: "residential" });
+      const allProducts = [...rentProRes, ...rentProCom, ...saleProRes, ...saleProCom];
+      res.json({rentProCom,rentProRes,allProducts, massage: " save success in database" });
     } else {
-      res.json({ body: JSON.parse(req.body.ads), productImg });
+      res.json({ error: "all fields is required" });
     }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const searchSale = async (req, res, next) => {
+  console.log(req.body);
+
+  const products = await AdForSale.find(req.body);
+  res.json(products);
+};
+export const searchRent = async (req, res, next) => {
+  console.log(req.body);
+
+  const products = await AdForRent.find(req.body);
+  res.json(products);
+};
+
+export const getProducts = async (req, res, next) => {
+  try {
+    const rentProRes = await AdForRent.find({ category: "residential" });
+    const rentProCom = await AdForRent.find({ category: "commercial" });
+    const saleProCom = await AdForSale.find({ category: "commercial" });
+    const saleProRes = await AdForSale.find({ category: "residential" });
+    const allProducts = [...rentProRes, ...rentProCom, ...saleProRes, ...saleProCom];
+
+    return res.json({rentProCom, rentProRes, saleProCom, saleProRes, allProducts});
   } catch (error) {
     console.log(error);
   }

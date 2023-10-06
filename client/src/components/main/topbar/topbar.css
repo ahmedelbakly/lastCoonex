@@ -1,3 +1,11 @@
+.topbar-container{
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  /* top: -100px;
+  z-index: 20; */
+  background-color: #fff;
+}
+
 .topbar-container .up {
   display: flex;
   justify-content: space-between;

@@ -2,8 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { MdOutlineClose } from "react-icons/md";
 import { BsCheckLg } from "react-icons/bs";
-const VerificationPhone = () => {
-  const Container = styled.div`
+const Container = styled.div`
     position: fixed;
     width: 100%;
     height: 100%;
@@ -156,6 +155,8 @@ const VerificationPhone = () => {
       right: 7%;
     }
   `;
+const VerificationPhone = () => {
+  
   return (
     <Container>
       {/* <Successfully>

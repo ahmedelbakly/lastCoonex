@@ -8,20 +8,12 @@ import { PiBedDuotone } from "react-icons/pi";
 import { PiBathtubThin } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import {  useParams } from 'react-router-dom';
-const Card = ({width}) => {
-  let { id } = useParams();
-
-  const proId = "fh6f+hfh8fh8+9+fgasss"
-  const navigate =  useNavigate()
-  const handleLink = (nav)=>{
-    navigate(nav);
-  }
-  const Card = styled.div`
+const CardContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: ${width};
+    
     height: 470px;
     box-shadow: 0px 2px 15px 0px gray;
     border-radius: 10px;
@@ -52,6 +44,8 @@ const Card = ({width}) => {
           font-size: 18px;
           font-weight: 500;
           color: #3d3d3d;
+          text-transform: capitalize;
+          font-weight: 600;
         }
       }
       & .address {
@@ -112,10 +106,17 @@ const Card = ({width}) => {
         }
       }
       & .avatar {
+        
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding-top: 12px;
+        & .userAndAva {
+          display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        }
         & p {
           font-weight: 600;
           font-size: 14px;
@@ -124,15 +125,24 @@ const Card = ({width}) => {
       }
     }
   `;
+const Card = ({width,title,cardId}) => {
+  let { id } = useParams();
+
+  const proId = "fh6f+hfh8fh8+9+fgasss"
+  const navigate =  useNavigate()
+  const handleLink = (nav)=>{
+    navigate(nav);
+  }
+  
 
   return (
-    <Card onClick={()=>handleLink(`/productInfo/${proId}`)}>
+    <CardContainer onClick={()=>handleLink(`/productInfo/${cardId ? cardId : proId}`)} className="card" style={{width:width}}>
       <div className="img">
         <img src={card} alt="" />
       </div>
       <div className="card-data">
         <div className="name-fav">
-          <p>House on the hollywood</p>
+          <p>{ title ? title : "House on the hollywood"}</p>
           <MdFavorite color="#199956" fontSize="20px" />
         </div>
         <div className="address">
@@ -155,11 +165,14 @@ const Card = ({width}) => {
           </div>
         </div>
         <div className="avatar">
-          <img src={avatar} alt="" />
+         <div className="userAndAva">
+         <img src={avatar} alt="" />
+         <p>ahmed elbakly</p>
+         </div>
           <p>Villa</p>
         </div>
       </div>
-    </Card>
+    </CardContainer>
   );
 };
 

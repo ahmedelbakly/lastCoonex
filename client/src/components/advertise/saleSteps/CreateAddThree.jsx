@@ -147,7 +147,8 @@ const CreateAddThree = ({
   productSaleData,
   setProductSaleData,
   handleSubmit,
-  handleChangeFile
+  handleChangeFile,
+  file
 }) => {
   const handleSelect = (e, name) => {
     setProductSaleData({ ...productSaleData, [name]: e.target.value });
@@ -157,31 +158,31 @@ const CreateAddThree = ({
       <InputsContainer>
         <TextField
           fieldName="Building Age"
-          options={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
+          options={["",1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]}
           change={handleSelect}
           name="buildingAge"
         />
         <TextField
           fieldName="Lister Type"
-          options={["vila","house","roof"]}
+          options={["","vila","house","roof"]}
           change={handleSelect}
           name="listerType"
         />
         <TextField
           fieldName="Payment Method"
-          options={["USD","ERU","EGP"]}
+          options={["","cash","visa"]}
           change={handleSelect}
           name="paymentMethod"
         />
         <TextField
           fieldName="Furnished / Unfurnished: *"
-          options={["Furnished","Unfurnished","semi-Furnished"]}
+          options={["","Furnished","Unfurnished","semi-Furnished"]}
           change={handleSelect}
           name="furnished"
         />
         <TextField
           fieldName="Property Mortgaged ?:"
-          options={["Yes","No"]}
+          options={["","Yes","No"]}
           change={handleSelect}
           name="mortgaged"
         />
@@ -194,7 +195,7 @@ const CreateAddThree = ({
               </label>
               
               <input type="file" name="file" id="file-input" onChange={(e)=>handleChangeFile(e)} />
-              <img src={owner} alt="" />
+              {  file ? <img src={URL.createObjectURL(file)} alt="" /> :    <img src={owner} alt="" />}
             </div>
           </TextFieldCon>
         </div>

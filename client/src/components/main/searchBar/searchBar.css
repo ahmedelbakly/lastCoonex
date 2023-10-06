@@ -13,7 +13,6 @@
   justify-content: space-between;
   align-items: center;
   gap: 40px;
-  
 }
 
 .searchCon .up .inputCon {
@@ -27,7 +26,7 @@
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
   position: relative;
-  color:#8898AA
+  color: #8898aa;
 }
 .searchCon .up .inputCon input {
   width: 100%;
@@ -49,13 +48,42 @@
   color: #8898aa;
 }
 
-.searchCon-res {
-  display: none !important;
+.searchConRes {
+  position: absolute;
+  bottom: 5px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  width: 343px;
+  flex-direction: column;
+  gap: 25px;
+  z-index: 111;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 2px 15px 0px gray;
+  padding: 10px 20px;
 }
 
-@media only screen and (max-width: 912px) {
-  
+.searchConRes .title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.searchConRes .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  gap: 15px;
+}
+.searchConRes .content button {
+  width: 100% !important;
+}
 
- 
-  
+.searchConRes .content input {
+  width: 100% !important;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+@media only screen and (max-width: 912px) {
 }

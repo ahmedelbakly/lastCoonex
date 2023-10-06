@@ -6,122 +6,122 @@ import { AiOutlineMail } from "react-icons/ai";
 import { BsTelephone } from "react-icons/bs";
 import styled from "styled-components"
 import contactUs from "../../images/contactUs.jpg";
-
-const ContactUsPage = () => {
-  const UpCon = styled.div`
-    width: 100%;
+const UpCon = styled.div`
+width: 100%;
+height: 72px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 100px;
+& .item {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  & .iconCon {
     height: 72px;
+    width: 72px;
+    background: #b49668;
+    border-radius: 50%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 100px;
-    & .item {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      align-items: center;
-      & .iconCon {
-        height: 72px;
-        width: 72px;
-        background: #b49668;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        & .icon {
-          font-size: 25px;
-          color: #fff;
-        }
-      }
-      & .text {
-        & h4 {
-          color: #3d3d3d;
-          font-size: 18px;
-          font-weight: 600;
-        }
-        & p {
-          color: #8898aa;
-          font-size: 16px;
-          font-weight: 400;
-          letter-spacing: 0.429px;
-        }
-      }
+    & .icon {
+      font-size: 25px;
+      color: #fff;
     }
-  `;
-  const DownCon = styled.div`
-    height: 500px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    & .imgCon {
-      height: 100%;
-      width: 45%;
-      padding: "10px 0px";
+  }
+  & .text {
+    & h4 {
+      color: #3d3d3d;
+      font-size: 18px;
+      font-weight: 600;
+    }
+    & p {
+      color: #8898aa;
+      font-size: 16px;
+      font-weight: 400;
+      letter-spacing: 0.429px;
+    }
+  }
+}
+`;
+const DownCon = styled.div`
+height: 500px;
+display: flex;
+justify-content: space-between;
+align-items: center;
+& .imgCon {
+  height: 100%;
+  width: 45%;
+  padding: "10px 0px";
 
-      & img {
-        width: 100%;
-        height: 100%;
-      }
+  & img {
+    width: 100%;
+    height: 100%;
+  }
+}
+& form {
+  border: 1px solid #e2e2e2;
+  width: 51%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-direction: column;
+  row-gap: 10px;
+  border-radius: 10px;
+  & .title {
+    & h3 {
+      color: #3d3d3d;
+      font-size: 20px;
+      font-weight: 600;
     }
-    & form {
-      border: 1px solid #e2e2e2;
-      width: 51%;
-      height: 100%;
-      padding: 10px;
-      display: flex;
-      justify-content: space-evenly;
-      align-items: flex-start;
-      flex-direction: column;
-      row-gap: 10px;
+    & p {
+      color: #8898aa;
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.429px;
+    }
+  }
+  & .inputsCon {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    row-gap: 15px;
+    & .item {
+      width: 48%;
+    }
+  }
+  & .message {
+    width: 100%;
+    & textArea {
+      width: 100%;
+      height: 155px;
       border-radius: 10px;
-      & .title {
-        & h3 {
-          color: #3d3d3d;
-          font-size: 20px;
-          font-weight: 600;
-        }
-        & p {
-          color: #8898aa;
-          font-size: 14px;
-          font-weight: 400;
-          letter-spacing: 0.429px;
-        }
-      }
-      & .inputsCon {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        row-gap: 15px;
-        & .item {
-          width: 48%;
-        }
-      }
-      & .message {
-        width: 100%;
-        & textArea {
-          width: 100%;
-          height: 155px;
-          border-radius: 10px;
-          border: 1px solid #e2e2e2;
-        }
-        & label {
-          color: #3d3d3d;
-          font-size: 14px;
-          font-weight: 600;
-          text-transform: capitalize;
-        }
-      }
-      & button {
-        padding: 12px 20px;
-        border-radius: 10px;
-        background: #199956;
-        color: #fff;
-        margin-left: auto;
-      }
+      border: 1px solid #e2e2e2;
     }
-  `;
+    & label {
+      color: #3d3d3d;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+  }
+  & button {
+    padding: 12px 20px;
+    border-radius: 10px;
+    background: #199956;
+    color: #fff;
+    margin-left: auto;
+  }
+}
+`;
+const ContactUsPage = () => {
+ 
   return (
     <>
       <AdvBanner text="ContactUs" />

@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import { GrUpload } from "react-icons/gr";
 import {
   ButtonsContainer,
@@ -38,13 +37,13 @@ const CreateAddOne = ({
         </TextFieldCon>
         <TextField
           fieldName="Property Type *"
-          options={["villa","house","flat","roof"]}
+          options={["","villa","house","apartment","roof"]}
           change={handleSelect}
           name="propertyType"
         />
         <TextField
           fieldName="Category *"
-          options={["rent","sale"]}
+          options={["","commercial","residential"]}
           change={handleSelect}
           name="category"
         />

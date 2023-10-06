@@ -8,38 +8,44 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { TextFieldCon, LoginContainer } from "./styles";
 import axios from "axios";
-import { logOutUser, loginUser } from '../../redux/userSlice';
-import { useSelector, useDispatch } from 'react-redux'
-                
+import { logOutUser, loginUser } from "../../redux/userSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 const Login = () => {
-  const user = useSelector((state) => state.user)
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
- 
+
   const [loginData, setLoginData] = useState({
     email: "",
     password: "",
     isChecked: false,
   });
-
+  const [error, setError] = useState();
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!loginData.email || !loginData.password ) {
+      return setError("Password and Email is required");
+    }
+   
     axios
       .post("http://localhost:3001/user/login", loginData)
       .then(function (response) {
         const data = response.data;
+        if (data.error) {
+          return setError(data.error);
+        }
         console.log(data);
-      if(typeof(data)!== String){
-        localStorage.setItem("token",data.userToken);
-        localStorage.setItem("reToken", data.refreshToken);
-        localStorage.setItem("coonexUId", data.user._id);
-        dispatch(loginUser(data.user));
-        
-        navigate("/")
-      }
-        
-        return data
+        if (typeof data !== String) {
+          localStorage.setItem("token", data.userToken);
+          localStorage.setItem("reToken", data.refreshToken);
+          localStorage.setItem("coonexUId", data.user._id);
+          dispatch(loginUser(data.user));
+
+          navigate("/");
+        }
+
+        return data;
       })
       .catch(function (error) {
         console.log(error);
@@ -56,9 +62,23 @@ const Login = () => {
 
   return (
     <LoginContainer>
-      <div className="fromCon">
+      <div className="fromCon" onClick={() => setError("")}>
         <img src={loginLogo} alt="loginLogo" />
         <p className="formTitle">Login</p>
+        {error && (
+          <p
+            style={{
+              color: "red",
+              fontSize: "15px",
+              padding: "3px 0px",
+              width: "max-content",
+              textTransform: "capitalize",
+              marginTop: "-10px",
+            }}
+          >
+            {error}
+          </p>
+        )}
         <form onSubmit={handleSubmit}>
           <TextField
             fieldName="Email"
