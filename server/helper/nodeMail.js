@@ -1,47 +1,47 @@
 
-import dotenv from "dotenv";
-dotenv.config({ path: "../.env" });
-import nodemailer from "nodemailer";
-import nodemailerSendGridTransport from "nodemailer-sendgrid-transport";
+// import dotenv from "dotenv";
+// dotenv.config({ path: "../.env" });
+// import nodemailer from "nodemailer";
+// import nodemailerSendGridTransport from "nodemailer-sendgrid-transport";
 
 
 
 
-export const sendMailToUser = async (email,subject,text) => {
-  await new Promise ((resolve,reject)=>{
-    try {
+// export const sendMailToUser = async (email,subject,text) => {
+//   await new Promise ((resolve,reject)=>{
+//     try {
       
-      const transporter = nodemailer.createTransport(nodemailerSendGridTransport({
-        auth:{
-          api_key :process.env.SENDGRID_API_KEY
-        }
-      }))
-      const mailOptions =  {
-              from: process.env.EMAIL,
-              to: email,
-              subject:subject ,
-              html : `<h1>active your account</h1> <p>link: ${text}</p>`
-            }
+//       const transporter = nodemailer.createTransport(nodemailerSendGridTransport({
+//         auth:{
+//           api_key :process.env.SENDGRID_API_KEY
+//         }
+//       }))
+//       const mailOptions =  {
+//               from: process.env.EMAIL,
+//               to: email,
+//               subject:subject ,
+//               html : `<h1>active your account</h1> <p>link: ${text}</p>`
+//             }
       
-            transporter.sendMail(mailOptions,(error, info)=>{
-        if(error){
-          console.log(error);
+//             transporter.sendMail(mailOptions,(error, info)=>{
+//         if(error){
+//           console.log(error);
     
-        }else {
-         // console.log(`mail is sent to ${email}`);
-          console.log(info);
-        }
-      })
+//         }else {
+//          // console.log(`mail is sent to ${email}`);
+//           console.log(info);
+//         }
+//       })
   
   
-    } catch (error) {
-      console.log(error);
-    }
-  })
+//     } catch (error) {
+//       console.log(error);
+//     }
+//   })
    
    
   
-  };
+//   };
 
 
 

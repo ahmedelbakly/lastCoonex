@@ -6,7 +6,7 @@ const salt = bcrypt.genSaltSync(+process.env.HASH_SALT);
 const salt2 = bcrypt.genSaltSync(15);
 import jwt from "jsonwebtoken";
 import { generateToken } from "../helper/functions.js";
-import { sendMailToUser } from "../helper/nodeMail.js";
+// import { sendMailToUser } from "../helper/nodeMail.js";
 const { sign, verify } = jwt;
 let refreshTokens = [];
 
